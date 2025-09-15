@@ -1,0 +1,6485 @@
+
+
+## app\globals.css
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------
+   Base styles
+-------------------------------- */
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+
+  /* Global body styles */
+  body {
+    @apply bg-background text-foreground;
+    font-family: system-ui, sans-serif;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  /* Global border color */
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  /* Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--border) / 0.8);
+  }
+
+  /* Focus-visible accessibility */
+  .focus-visible {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background outline-none;
+  }
+}
+
+/* ------------------------------
+   Components
+-------------------------------- */
+@layer components {
+  /* Gradient button */
+  .btn-gradient {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-200;
+  }
+
+  /* Spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-gray-300 border-t-primary;
+  }
+
+  /* Form groups */
+  .form-group { @apply space-y-2; }
+  .form-error { @apply text-destructive text-sm; }
+
+  /* Status badges */
+  .status-new        { @apply bg-blue-100 text-blue-800 border border-blue-200; }
+  .status-qualified  { @apply bg-green-100 text-green-800 border border-green-200; }
+  .status-contacted  { @apply bg-yellow-100 text-yellow-800 border border-yellow-200; }
+  .status-visited    { @apply bg-purple-100 text-purple-800 border border-purple-200; }
+  .status-negotiation{ @apply bg-orange-100 text-orange-800 border border-orange-200; }
+  .status-converted  { @apply bg-emerald-100 text-emerald-800 border border-emerald-200; }
+  .status-dropped    { @apply bg-red-100 text-red-800 border border-red-200; }
+}
+
+/* ------------------------------
+   Utilities
+-------------------------------- */
+@layer utilities {
+  .text-balance    { text-wrap: balance; }
+  .animate-in      { animation: animate-in 0.2s ease-out; }
+  .animate-out     { animation: animate-out 0.2s ease-in; }
+  .safe-top        { padding-top: env(safe-area-inset-top); }
+  .safe-bottom     { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ------------------------------
+   Keyframes
+-------------------------------- */
+@keyframes animate-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes animate-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
+}
+
+/* ------------------------------
+   Responsive & Print
+-------------------------------- */
+@media print {
+  .no-print { display: none !important; }
+  body { @apply text-black bg-white; }
+  .print-break { page-break-after: always; }
+}
+
+@media (max-width: 640px) {
+  .mobile-stack > * + * { margin-top: 1rem; }
+  .mobile-full { width: 100vw; margin-left: calc(-50vw + 50%); }
+}
+
+@media (prefers-contrast: high) {
+  .border { border-width: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus-visible polyfill */
+.js-focus-visible :focus:not(.focus-visible) { outline: none; }
+
+```
+
+## app\layout.tsx
+
+```tsx
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { Providers } from './providers';
+import { Toaster } from '@/components/ui/toaster';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Buyer Lead Intake - Real Estate CRM',
+  description: 'Manage your real estate buyer leads efficiently',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <Providers>
+          <div className="min-h-screen bg-gray-50">
+            {children}
+          </div>
+          <Toaster />
+        </Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+## app\page.tsx
+
+```tsx
+import { redirect } from 'next/navigation';
+import { getServerSession } from '@/lib/auth'; // use your custom helper
+import { SignInButton } from '@/components/auth/signin-button';
+
+export default async function HomePage() {
+  const session = await getServerSession();
+
+  // Redirect if user is already signed in
+  if (session && session.user) {
+    redirect('/buyers');
+  }
+
+  return (
+    <div className="flex min-h-screen flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        <div>
+          <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            Buyer Lead Intake
+          </h1>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Manage your real estate leads efficiently
+          </p>
+        </div>
+        <div className="mt-8 space-y-6">
+          <SignInButton />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+```
+
+## app\providers.tsx
+
+```tsx
+'use client';
+
+import { SessionProvider } from 'next-auth/react';
+import { ReactNode } from 'react';
+
+interface ProvidersProps {
+  children: ReactNode;
+}
+
+export function Providers({ children }: ProvidersProps) {
+  return <SessionProvider>{children}</SessionProvider>;
+}
+```
+
+## app\(auth)\layout.tsx
+
+```tsx
+import { redirect } from 'next/navigation';
+import { getServerSession } from '@/lib/auth';
+import { Header } from '@/components/layout/header';
+import { Sidebar } from '@/components/layout/sidebar';
+
+interface AuthLayoutProps {
+  children: React.ReactNode;
+}
+
+export default async function AuthLayout({ children }: AuthLayoutProps) {
+  // Get session using custom helper
+  const session = await getServerSession();
+
+  // Redirect to login if no session or user
+  if (!session || !session.user) {
+    redirect('/');
+  }
+
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <Header user={session.user} />
+        <main className="flex-1 overflow-y-auto p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}
+
+```
+
+## app\(auth)\buyers\page.tsx
+
+```tsx
+import { Suspense } from 'react';
+import { redirect } from 'next/navigation';
+import { getServerSession } from '@/lib/auth';
+import { BuyersTable } from '@/components/buyers/buyers-table';
+import { BuyersFilters } from '@/components/buyers/buyers-filter';
+import { BuyersStats } from '@/components/buyers/buyers-stats';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
+
+interface SearchParams {
+  search?: string;
+  city?: string;
+  propertyType?: string;
+  status?: string;
+  timeline?: string;
+  page?: string;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
+export default async function BuyersPage({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  // Get session using your helper
+  const session = await getServerSession();
+
+  // Redirect if no session or no user
+  if (!session || !session.user) {
+    redirect('/');
+  }
+
+  const userId = session.user.id;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Buyer Leads</h1>
+          <p className="text-muted-foreground">
+            Manage and track your real estate buyer leads
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button asChild>
+            <Link href="/buyers/new">
+              <Plus className="mr-2 h-4 w-4" />
+              Add Lead
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      <Suspense fallback={<div>Loading stats...</div>}>
+        <BuyersStats userId={userId} />
+      </Suspense>
+
+      <div className="space-y-4">
+        <BuyersFilters />
+        <Suspense fallback={<div>Loading buyers...</div>}>
+          <BuyersTable searchParams={searchParams} userId={userId} />
+        </Suspense>
+      </div>
+    </div>
+  );
+}
+
+```
+
+## app\(auth)\buyers\new\page.tsx
+
+```tsx
+import { redirect } from 'next/navigation';
+import { getServerSession } from '@/lib/auth';
+import { BuyerForm } from '@/components/buyers/buyer-form';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+
+export default async function NewBuyerPage() {
+  // Get session using your helper
+  const session = await getServerSession();
+
+  // Redirect if no session or user
+  if (!session || !session.user) {
+    redirect('/');
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" asChild>
+          <Link href="/buyers">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Add New Lead</h1>
+          <p className="text-muted-foreground">
+            Create a new buyer lead entry
+          </p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-2xl">
+        <BuyerForm userId={session.user.id} />
+      </div>
+    </div>
+  );
+}
+
+```
+
+## app\(auth)\buyers\[id]\page.tsx
+
+```tsx
+// app/buyers/[id]/page.tsx
+import { notFound, redirect } from "next/navigation";
+// import { getServerSession } from "@/lib/getServerSession"; // custom helper
+import { authOptions,getServerSession } from "@/lib/auth";
+import { getBuyer, getBuyerHistory } from "@/lib/db/queries";
+import { BuyerForm } from "@/components/buyers/buyer-form";
+import { BuyerHistory } from "@/components/buyers/buyer-history";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// Types
+type AuthUser = {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  role?: "user" | "admin";
+};
+
+type Session = {
+  user: AuthUser;
+  expires: string;
+};
+
+export default async function BuyerDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  // Get server session
+  const session = await getServerSession() as Session | null;
+
+  if (!session?.user) redirect("/");
+
+  // Fetch buyer
+  const buyer = await getBuyer(params.id);
+  if (!buyer) notFound();
+
+  const canEdit = buyer.ownerId === session.user.id || session.user.role === "admin";
+
+  const history = await getBuyerHistory(params.id);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" asChild>
+          <Link href="/buyers">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Link>
+        </Button>
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold tracking-tight">{buyer.fullName}</h1>
+          <p className="text-muted-foreground">Lead details and history</p>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-4xl">
+        <Tabs defaultValue="details" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="details">Details</TabsTrigger>
+            <TabsTrigger value="history">History</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="details" className="space-y-6">
+            {canEdit ? (
+              <BuyerForm buyer={buyer} userId={session.user.id} isEditing />
+            ) : (
+              <div className="rounded-lg border bg-card p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">Lead Information</h3>
+                  <div className="text-sm text-muted-foreground">
+                    Read-only (Owner: {buyer.owner?.name || buyer.owner?.email})
+                  </div>
+                </div>
+                <BuyerForm buyer={buyer} userId={session.user.id} isEditing readOnly />
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="history">
+            <BuyerHistory history={history} />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
+
+```
+
+## app\api\auth\[...nextauth]\route.ts
+
+```ts
+// app/api/auth/[...nextauth]/route.ts
+import { Auth } from '@auth/core';
+import { authOptions } from '@/lib/auth';
+
+const handler = (req: Request) => Auth(req, authOptions);
+
+export { handler as GET, handler as POST };
+
+```
+
+## app\api\buyers\route.ts
+
+```ts
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getBuyers, createBuyer } from '@/lib/db/queries';
+import { buyerFiltersSchema, createBuyerSchema } from '@/lib/validations/buyer';
+import { z } from 'zod';
+
+export async function GET(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(request.url);
+    const filters = {
+      search: searchParams.get('search') || undefined,
+      city: searchParams.get('city') || undefined,
+      propertyType: searchParams.get('propertyType') || undefined,
+      status: searchParams.get('status') || undefined,
+      timeline: searchParams.get('timeline') || undefined,
+      page: parseInt(searchParams.get('page') || '1'),
+      limit: parseInt(searchParams.get('limit') || '10'),
+      sortBy: searchParams.get('sortBy') || 'updatedAt',
+      sortOrder: searchParams.get('sortOrder') || 'desc',
+    };
+
+    const validatedFilters = buyerFiltersSchema.parse(filters);
+    const result = await getBuyers(validatedFilters);
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error('Error fetching buyers:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch buyers' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const validatedData = createBuyerSchema.parse(body);
+    
+    const buyer = await createBuyer(validatedData, session.user.id);
+    
+    return NextResponse.json(buyer, { status: 201 });
+  } catch (error) {
+    console.error('Error creating buyer:', error);
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Validation failed', details: error.errors },
+        { status: 400 }
+      );
+    }
+    
+    return NextResponse.json(
+      { error: 'Failed to create buyer' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## app\api\buyers\export\route.tsx
+
+```tsx
+'use client';
+
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { buyerSchema, type BuyerFormData } from '@/lib/validations/buyer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { X, Plus } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+
+interface BuyerFormProps {
+  buyer?: any;
+  userId: string;
+  isEditing?: boolean;
+  readOnly?: boolean;
+}
+
+export function BuyerForm({ buyer, userId, isEditing = false, readOnly = false }: BuyerFormProps) {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [newTag, setNewTag] = useState('');
+  const router = useRouter();
+
+  const form = useForm<BuyerFormData>({
+    resolver: zodResolver(buyerSchema),
+    defaultValues: buyer ? {
+      fullName: buyer.fullName,
+      email: buyer.email || '',
+      phone: buyer.phone,
+      city: buyer.city,
+      propertyType: buyer.propertyType,
+      bhk: buyer.bhk || undefined,
+      purpose: buyer.purpose,
+      budgetMin: buyer.budgetMin || undefined,
+      budgetMax: buyer.budgetMax || undefined,
+      timeline: buyer.timeline,
+      source: buyer.source,
+      status: buyer.status || 'New',
+      notes: buyer.notes || '',
+      tags: buyer.tags || [],
+    } : {
+      status: 'New',
+      tags: [],
+    },
+  });
+
+  const watchedPropertyType = form.watch('propertyType');
+  const watchedTags = form.watch('tags');
+
+  const onSubmit = async (data: BuyerFormData) => {
+    setError(null);
+
+    startTransition(async () => {
+      try {
+        const url = isEditing ? `/api/buyers/${buyer.id}` : '/api/buyers';
+        const method = isEditing ? 'PUT' : 'POST';
+        
+        const payload = isEditing 
+          ? { ...data, id: buyer.id, updatedAt: buyer.updatedAt.toISOString() }
+          : data;
+
+        const response = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to save buyer');
+        }
+
+        router.push('/buyers');
+        router.refresh();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      }
+    });
+  };
+
+  const addTag = () => {
+    if (newTag.trim() && !watchedTags.includes(newTag.trim())) {
+      form.setValue('tags', [...watchedTags, newTag.trim()]);
+      setNewTag('');
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    form.setValue('tags', watchedTags.filter(tag => tag !== tagToRemove));
+  };
+
+  const shouldShowBHK = ['Apartment', 'Villa'].includes(watchedPropertyType);
+
+  if (readOnly) {
+    return (
+      <div className="space-y-6">
+        {/* Read-only view would go here - simplified for brevity */}
+        <p>Read-only view not implemented in this example</p>
+      </div>
+    );
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{isEditing ? 'Edit Buyer Lead' : 'Add New Buyer Lead'}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {error && (
+            <Alert variant="destructive">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          {/* Basic Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="fullName">Full Name *</Label>
+              <Input
+                id="fullName"
+                {...form.register('fullName')}
+                disabled={isPending}
+              />
+              {form.formState.errors.fullName && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.fullName.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="phone">Phone *</Label>
+              <Input
+                id="phone"
+                {...form.register('phone')}
+                disabled={isPending}
+                placeholder="10-15 digits"
+              />
+              {form.formState.errors.phone && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.phone.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                {...form.register('email')}
+                disabled={isPending}
+              />
+              {form.formState.errors.email && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="city">City *</Label>
+              <Select
+                value={form.watch('city')}
+                onValueChange={(value) => form.setValue('city', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select city" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Chandigarh">Chandigarh</SelectItem>
+                  <SelectItem value="Mohali">Mohali</SelectItem>
+                  <SelectItem value="Zirakpur">Zirakpur</SelectItem>
+                  <SelectItem value="Panchkula">Panchkula</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.city && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.city.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Property Information */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="propertyType">Property Type *</Label>
+              <Select
+                value={form.watch('propertyType')}
+                onValueChange={(value) => form.setValue('propertyType', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Apartment">Apartment</SelectItem>
+                  <SelectItem value="Villa">Villa</SelectItem>
+                  <SelectItem value="Plot">Plot</SelectItem>
+                  <SelectItem value="Office">Office</SelectItem>
+                  <SelectItem value="Retail">Retail</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.propertyType && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.propertyType.message}
+                </p>
+              )}
+            </div>
+
+            {shouldShowBHK && (
+              <div>
+                <Label htmlFor="bhk">BHK *</Label>
+                <Select
+                  value={form.watch('bhk') || ''}
+                  onValueChange={(value) => form.setValue('bhk', value as any)}
+                  disabled={isPending}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select BHK" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 BHK</SelectItem>
+                    <SelectItem value="2">2 BHK</SelectItem>
+                    <SelectItem value="3">3 BHK</SelectItem>
+                    <SelectItem value="4">4 BHK</SelectItem>
+                    <SelectItem value="Studio">Studio</SelectItem>
+                  </SelectContent>
+                </Select>
+                {form.formState.errors.bhk && (
+                  <p className="text-sm text-destructive mt-1">
+                    {form.formState.errors.bhk.message}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <div>
+              <Label htmlFor="purpose">Purpose *</Label>
+              <Select
+                value={form.watch('purpose')}
+                onValueChange={(value) => form.setValue('purpose', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Buy or Rent" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Buy">Buy</SelectItem>
+                  <SelectItem value="Rent">Rent</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.purpose && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.purpose.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Budget */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="budgetMin">Budget Min (₹)</Label>
+              <Input
+                id="budgetMin"
+                type="number"
+                {...form.register('budgetMin', { valueAsNumber: true })}
+                disabled={isPending}
+                placeholder="Minimum budget"
+              />
+              {form.formState.errors.budgetMin && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.budgetMin.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="budgetMax">Budget Max (₹)</Label>
+              <Input
+                id="budgetMax"
+                type="number"
+                {...form.register('budgetMax', { valueAsNumber: true })}
+                disabled={isPending}
+                placeholder="Maximum budget"
+              />
+              {form.formState.errors.budgetMax && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.budgetMax.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Timeline, Source, Status */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="timeline">Timeline *</Label>
+              <Select
+                value={form.watch('timeline')}
+                onValueChange={(value) => form.setValue('timeline', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select timeline" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0-3m">0-3 months</SelectItem>
+                  <SelectItem value="3-6m">3-6 months</SelectItem>
+                  <SelectItem value=">6m">6+ months</SelectItem>
+                  <SelectItem value="Exploring">Just exploring</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.timeline && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.timeline.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="source">Source *</Label>
+              <Select
+                value={form.watch('source')}
+                onValueChange={(value) => form.setValue('source', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select source" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Website">Website</SelectItem>
+                  <SelectItem value="Referral">Referral</SelectItem>
+                  <SelectItem value="Walk-in">Walk-in</SelectItem>
+                  <SelectItem value="Call">Call</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.source && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.source.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="status">Status</Label>
+              <Select
+                value={form.watch('status')}
+                onValueChange={(value) => form.setValue('status', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="New">New</SelectItem>
+                  <SelectItem value="Qualified">Qualified</SelectItem>
+                  <SelectItem value="Contacted">Contacted</SelectItem>
+                  <SelectItem value="Visited">Visited</SelectItem>
+                  <SelectItem value="Negotiation">Negotiation</SelectItem>
+                  <SelectItem value="Converted">Converted</SelectItem>
+                  <SelectItem value="Dropped">Dropped</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div>
+            <Label>Tags</Label>
+            <div className="flex gap-2 mb-2">
+              <Input
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                placeholder="Add a tag"
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                disabled={isPending}
+              />
+              <Button type="button" variant="outline" onClick={addTag} disabled={!newTag.trim() || isPending}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {watchedTags.map((tag) => (
+                <Badge key={tag} variant="secondary" className="gap-1">
+                  {tag}
+                  <button
+                   type="button"
+                   onClick={() => removeTag(tag)}
+                   className="ml-1 hover:bg-destructive/20 rounded-full p-0.5"
+                   disabled={isPending}
+                   >
+  <X className="h-3 w-3" aria-hidden="true" />
+  <span className="sr-only">Remove tag {tag}</span>
+</button>
+
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div>
+            <Label htmlFor="notes">Notes</Label>
+            <Textarea
+              id="notes"
+              {...form.register('notes')}
+              disabled={isPending}
+              placeholder="Additional notes about the buyer..."
+              rows={3}
+            />
+            {form.formState.errors.notes && (
+              <p className="text-sm text-destructive mt-1">
+                {form.formState.errors.notes.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.back()}
+              disabled={isPending}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? 'Saving...' : isEditing ? 'Update Lead' : 'Create Lead'}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## app\api\buyers\import\route.ts
+
+```ts
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { createBuyer } from '@/lib/db/queries';
+import { csvBuyerSchema } from '@/lib/validations/buyer';
+import Papa from 'papaparse';
+
+const MAX_ROWS = 200;
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+    
+    if (!file) {
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+    }
+
+    const text = await file.text();
+    const parseResult = Papa.parse(text, {
+      header: true,
+      skipEmptyLines: true,
+      dynamicTyping: false, // Keep as strings for validation
+    });
+
+    if (parseResult.errors.length > 0) {
+      return NextResponse.json(
+        { error: 'CSV parsing failed', details: parseResult.errors },
+        { status: 400 }
+      );
+    }
+
+    const rows = parseResult.data as any[];
+    
+    if (rows.length > MAX_ROWS) {
+      return NextResponse.json(
+        { error: `Too many rows. Maximum ${MAX_ROWS} allowed.` },
+        { status: 400 }
+      );
+    }
+
+    const results = {
+      valid: [] as any[],
+      invalid: [] as any[],
+    };
+
+    // Validate each row
+    rows.forEach((row, index) => {
+      const validation = csvBuyerSchema.safeParse(row);
+      
+      if (validation.success) {
+        results.valid.push(validation.data);
+      } else {
+        results.invalid.push({
+          row: index + 1,
+          data: row,
+          errors: validation.error.errors.map(err => 
+            `${err.path.join('.')}: ${err.message}`
+          ),
+        });
+      }
+    });
+
+    // If there are validation errors, return them without importing
+    if (results.invalid.length > 0) {
+      return NextResponse.json({
+        error: 'Validation errors found',
+        results,
+      }, { status: 400 });
+    }
+
+    // Import all valid rows in a transaction
+    const importedBuyers = [];
+    for (const buyerData of results.valid) {
+      try {
+        const buyer = await createBuyer(buyerData, session.user.id);
+        importedBuyers.push(buyer);
+      } catch (error) {
+        console.error('Error importing buyer:', error);
+        // In a real transaction, this would rollback all changes
+        return NextResponse.json(
+          { error: 'Import failed during database operation' },
+          { status: 500 }
+        );
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      imported: importedBuyers.length,
+      buyers: importedBuyers,
+    });
+
+  } catch (error) {
+    console.error('Error importing CSV:', error);
+    return NextResponse.json(
+      { error: 'Failed to export CSV' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## app\api\buyers\new\route.ts
+
+```ts
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { createBuyer } from '@/lib/db/queries';
+import { createBuyerSchema } from '@/lib/validations/buyer';
+import { z } from 'zod';
+
+// Rate limiting storage (in production, use Redis)
+const rateLimitMap = new Map();
+
+// Simple rate limiting function
+function rateLimit(identifier: string, limit: number = 10, windowMs: number = 60000) {
+  const now = Date.now();
+  const windowStart = now - windowMs;
+  
+  if (!rateLimitMap.has(identifier)) {
+    rateLimitMap.set(identifier, []);
+  }
+  
+  const requests = rateLimitMap.get(identifier);
+  
+  // Remove old requests outside the window
+  const validRequests = requests.filter((time: number) => time > windowStart);
+  rateLimitMap.set(identifier, validRequests);
+  
+  if (validRequests.length >= limit) {
+    return false;
+  }
+  
+  validRequests.push(now);
+  return true;
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    // Rate limiting
+    const identifier = session.user.id || session.user.email || 'unknown';
+    if (!rateLimit(identifier, 10, 60000)) { // 10 requests per minute
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await request.json();
+    
+    // Validate the request body
+    const validatedData = createBuyerSchema.parse(body);
+    
+    // Create the buyer
+    const buyer = await createBuyer(validatedData, session.user.id);
+    
+    return NextResponse.json(buyer, { status: 201 });
+  } catch (error) {
+    console.error('Error creating buyer:', error);
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { 
+          error: 'Validation failed', 
+          details: error.errors.map(err => ({
+            field: err.path.join('.'),
+            message: err.message
+          }))
+        },
+        { status: 400 }
+      );
+    }
+    
+    // Handle specific database errors
+    if (error instanceof Error) {
+      if (error.message.includes('unique constraint')) {
+        return NextResponse.json(
+          { error: 'A lead with this email or phone already exists.' },
+          { status: 409 }
+        );
+      }
+      
+      if (error.message.includes('foreign key constraint')) {
+        return NextResponse.json(
+          { error: 'Invalid user reference.' },
+          { status: 400 }
+        );
+      }
+    }
+    
+    return NextResponse.json(
+      { error: 'Failed to create buyer lead. Please try again.' },
+      { status: 500 }
+    );
+  }
+}
+
+// Allow only POST method
+export async function GET() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+}
+
+export async function PUT() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+}
+
+export async function DELETE() {
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 });
+}
+```
+
+## app\api\buyers\[id]\route.ts
+
+```ts
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { getBuyer, updateBuyer, deleteBuyer } from '@/lib/db/queries';
+import { updateBuyerSchema } from '@/lib/validations/buyer';
+import { z } from 'zod';
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const buyer = await getBuyer(params.id);
+    
+    if (!buyer) {
+      return NextResponse.json({ error: 'Buyer not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(buyer);
+  } catch (error) {
+    console.error('Error fetching buyer:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch buyer' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const buyer = await getBuyer(params.id);
+    
+    if (!buyer) {
+      return NextResponse.json({ error: 'Buyer not found' }, { status: 404 });
+    }
+
+    // Check ownership
+    if (buyer.ownerId !== session.user.id && session.user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    const body = await request.json();
+    const validatedData = updateBuyerSchema.parse(body);
+    
+    // Check for concurrent updates
+    if (validatedData.updatedAt && buyer.updatedAt.toISOString() !== validatedData.updatedAt) {
+      return NextResponse.json(
+        { error: 'Record has been modified by another user. Please refresh and try again.' },
+        { status: 409 }
+      );
+    }
+
+    const { id, updatedAt, ...updateData } = validatedData;
+    const updatedBuyer = await updateBuyer(params.id, updateData, session.user.id, buyer);
+    
+    return NextResponse.json(updatedBuyer);
+  } catch (error) {
+    console.error('Error updating buyer:', error);
+    
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Validation failed', details: error.errors },
+        { status: 400 }
+      );
+    }
+    
+    return NextResponse.json(
+      { error: 'Failed to update buyer' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const buyer = await getBuyer(params.id);
+    
+    if (!buyer) {
+      return NextResponse.json({ error: 'Buyer not found' }, { status: 404 });
+    }
+
+    // Check ownership
+    if (buyer.ownerId !== session.user.id && session.user.role !== 'admin') {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    await deleteBuyer(params.id);
+    
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting buyer:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete buyer' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## components\auth\signin-button.tsx
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Mail, CheckCircle } from 'lucide-react';
+
+export function SignInButton() {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const result = await signIn('email', {
+        email,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('Failed to send magic link. Please try again.');
+      } else {
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      setError('An unexpected error occurred.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (isSubmitted) {
+    return (
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <CheckCircle className="h-12 w-12 text-green-600" />
+            <div>
+              <h3 className="text-lg font-semibold">Check your email</h3>
+              <p className="text-sm text-muted-foreground">
+                We've sent a magic link to {email}
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Sign in to your account</CardTitle>
+        <CardDescription>
+          Enter your email to receive a magic link
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <Alert variant="destructive">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+          
+          <div>
+            <Label htmlFor="email">Email address</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              disabled={isLoading}
+            />
+          </div>
+          
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Mail className="mr-2 h-4 w-4 animate-spin" />
+                Sending magic link...
+              </>
+            ) : (
+              <>
+                <Mail className="mr-2 h-4 w-4" />
+                Send magic link
+              </>
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## components\buyers\buyer-form.tsx
+
+```tsx
+'use client';
+
+import { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { buyerSchema, type BuyerFormData } from '@/lib/validations/buyer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { X, Plus } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+
+interface BuyerFormProps {
+  buyer?: any;
+  userId: string;
+  isEditing?: boolean;
+  readOnly?: boolean;
+}
+
+export function BuyerForm({ buyer, userId, isEditing = false, readOnly = false }: BuyerFormProps) {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [newTag, setNewTag] = useState('');
+  const router = useRouter();
+
+  const form = useForm<BuyerFormData>({
+    resolver: zodResolver(buyerSchema),
+    defaultValues: buyer ? {
+      fullName: buyer.fullName,
+      email: buyer.email || '',
+      phone: buyer.phone,
+      city: buyer.city,
+      propertyType: buyer.propertyType,
+      bhk: buyer.bhk || undefined,
+      purpose: buyer.purpose,
+      budgetMin: buyer.budgetMin || undefined,
+      budgetMax: buyer.budgetMax || undefined,
+      timeline: buyer.timeline,
+      source: buyer.source,
+      status: buyer.status || 'New',
+      notes: buyer.notes || '',
+      tags: buyer.tags || [],
+    } : {
+      status: 'New',
+      tags: [],
+    },
+  });
+
+  const watchedPropertyType = form.watch('propertyType');
+  const watchedTags = form.watch('tags');
+
+  const onSubmit = async (data: BuyerFormData) => {
+    setError(null);
+
+    startTransition(async () => {
+      try {
+        const url = isEditing ? `/api/buyers/${buyer.id}` : '/api/buyers';
+        const method = isEditing ? 'PUT' : 'POST';
+        
+        const payload = isEditing 
+          ? { ...data, id: buyer.id, updatedAt: buyer.updatedAt.toISOString() }
+          : data;
+
+        const response = await fetch(url, {
+          method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to save buyer');
+        }
+
+        router.push('/buyers');
+        router.refresh();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      }
+    });
+  };
+
+  const addTag = () => {
+    if (newTag.trim() && !watchedTags.includes(newTag.trim())) {
+      form.setValue('tags', [...watchedTags, newTag.trim()]);
+      setNewTag('');
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    form.setValue('tags', watchedTags.filter(tag => tag !== tagToRemove));
+  };
+
+  const shouldShowBHK = ['Apartment', 'Villa'].includes(watchedPropertyType);
+
+  if (readOnly) {
+    return (
+      <div className="space-y-6">
+        {/* Read-only view would go here - simplified for brevity */}
+        <p>Read-only view not implemented in this example</p>
+      </div>
+    );
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{isEditing ? 'Edit Buyer Lead' : 'Add New Buyer Lead'}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          {error && (
+            <Alert variant="destructive">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          {/* Basic Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="fullName">Full Name *</Label>
+              <Input
+                id="fullName"
+                {...form.register('fullName')}
+                disabled={isPending}
+              />
+              {form.formState.errors.fullName && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.fullName.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="phone">Phone *</Label>
+              <Input
+                id="phone"
+                {...form.register('phone')}
+                disabled={isPending}
+                placeholder="10-15 digits"
+              />
+              {form.formState.errors.phone && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.phone.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                {...form.register('email')}
+                disabled={isPending}
+              />
+              {form.formState.errors.email && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="city">City *</Label>
+              <Select
+                value={form.watch('city')}
+                onValueChange={(value) => form.setValue('city', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select city" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Chandigarh">Chandigarh</SelectItem>
+                  <SelectItem value="Mohali">Mohali</SelectItem>
+                  <SelectItem value="Zirakpur">Zirakpur</SelectItem>
+                  <SelectItem value="Panchkula">Panchkula</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.city && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.city.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Property Information */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="propertyType">Property Type *</Label>
+              <Select
+                value={form.watch('propertyType')}
+                onValueChange={(value) => form.setValue('propertyType', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Apartment">Apartment</SelectItem>
+                  <SelectItem value="Villa">Villa</SelectItem>
+                  <SelectItem value="Plot">Plot</SelectItem>
+                  <SelectItem value="Office">Office</SelectItem>
+                  <SelectItem value="Retail">Retail</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.propertyType && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.propertyType.message}
+                </p>
+              )}
+            </div>
+
+            {shouldShowBHK && (
+              <div>
+                <Label htmlFor="bhk">BHK *</Label>
+                <Select
+                  value={form.watch('bhk') || ''}
+                  onValueChange={(value) => form.setValue('bhk', value as any)}
+                  disabled={isPending}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select BHK" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 BHK</SelectItem>
+                    <SelectItem value="2">2 BHK</SelectItem>
+                    <SelectItem value="3">3 BHK</SelectItem>
+                    <SelectItem value="4">4 BHK</SelectItem>
+                    <SelectItem value="Studio">Studio</SelectItem>
+                  </SelectContent>
+                </Select>
+                {form.formState.errors.bhk && (
+                  <p className="text-sm text-destructive mt-1">
+                    {form.formState.errors.bhk.message}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <div>
+              <Label htmlFor="purpose">Purpose *</Label>
+              <Select
+                value={form.watch('purpose')}
+                onValueChange={(value) => form.setValue('purpose', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Buy or Rent" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Buy">Buy</SelectItem>
+                  <SelectItem value="Rent">Rent</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.purpose && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.purpose.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Budget */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="budgetMin">Budget Min (₹)</Label>
+              <Input
+                id="budgetMin"
+                type="number"
+                {...form.register('budgetMin', { valueAsNumber: true })}
+                disabled={isPending}
+                placeholder="Minimum budget"
+              />
+              {form.formState.errors.budgetMin && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.budgetMin.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="budgetMax">Budget Max (₹)</Label>
+              <Input
+                id="budgetMax"
+                type="number"
+                {...form.register('budgetMax', { valueAsNumber: true })}
+                disabled={isPending}
+                placeholder="Maximum budget"
+              />
+              {form.formState.errors.budgetMax && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.budgetMax.message}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Timeline, Source, Status */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="timeline">Timeline *</Label>
+              <Select
+                value={form.watch('timeline')}
+                onValueChange={(value) => form.setValue('timeline', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select timeline" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="0-3m">0-3 months</SelectItem>
+                  <SelectItem value="3-6m">3-6 months</SelectItem>
+                  <SelectItem value=">6m">6+ months</SelectItem>
+                  <SelectItem value="Exploring">Just exploring</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.timeline && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.timeline.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="source">Source *</Label>
+              <Select
+                value={form.watch('source')}
+                onValueChange={(value) => form.setValue('source', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select source" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Website">Website</SelectItem>
+                  <SelectItem value="Referral">Referral</SelectItem>
+                  <SelectItem value="Walk-in">Walk-in</SelectItem>
+                  <SelectItem value="Call">Call</SelectItem>
+                  <SelectItem value="Other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+              {form.formState.errors.source && (
+                <p className="text-sm text-destructive mt-1">
+                  {form.formState.errors.source.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label htmlFor="status">Status</Label>
+              <Select
+                value={form.watch('status')}
+                onValueChange={(value) => form.setValue('status', value as any)}
+                disabled={isPending}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="New">New</SelectItem>
+                  <SelectItem value="Qualified">Qualified</SelectItem>
+                  <SelectItem value="Contacted">Contacted</SelectItem>
+                  <SelectItem value="Visited">Visited</SelectItem>
+                  <SelectItem value="Negotiation">Negotiation</SelectItem>
+                  <SelectItem value="Converted">Converted</SelectItem>
+                  <SelectItem value="Dropped">Dropped</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div>
+            <Label>Tags</Label>
+            <div className="flex gap-2 mb-2">
+              <Input
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                placeholder="Add a tag"
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                disabled={isPending}
+              />
+              <Button type="button" variant="outline" onClick={addTag} disabled={!newTag.trim() || isPending}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {watchedTags.map((tag) => (
+                <Badge key={tag} variant="secondary" className="gap-1">
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="ml-1 hover:bg-destructive/20 rounded-full p-0.5"
+                    disabled={isPending}
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div>
+            <Label htmlFor="notes">Notes</Label>
+            <Textarea
+              id="notes"
+              {...form.register('notes')}
+              disabled={isPending}
+              placeholder="Additional notes about the buyer..."
+              rows={3}
+            />
+            {form.formState.errors.notes && (
+              <p className="text-sm text-destructive mt-1">
+                {form.formState.errors.notes.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.back()}
+              disabled={isPending}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? 'Saving...' : isEditing ? 'Update Lead' : 'Create Lead'}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}Failed to import CSV' },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## components\buyers\buyer-history.tsx
+
+```tsx
+import { formatDate, formatDateTime, camelCaseToTitle } from '@/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Clock, User, Edit3 } from 'lucide-react';
+
+interface BuyerHistoryProps {
+  history: any[];
+}
+
+export function BuyerHistory({ history }: BuyerHistoryProps) {
+  if (history.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Clock className="h-5 w-5" />
+            Change History
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center py-8 text-center">
+            <div className="space-y-2">
+              <Edit3 className="mx-auto h-8 w-8 text-muted-foreground" />
+              <h3 className="font-medium">No changes recorded</h3>
+              <p className="text-sm text-muted-foreground">
+                Changes to this lead will appear here
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const formatChangeValue = (value: any): string => {
+    if (value === null || value === undefined) return 'None';
+    if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+    if (Array.isArray(value)) return value.join(', ') || 'None';
+    if (typeof value === 'object' && value.toString() === '[object Object]') {
+      return JSON.stringify(value);
+    }
+    return String(value);
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <Clock className="h-5 w-5" />
+          Change History
+          <Badge variant="secondary">{history.length}</Badge>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-6">
+          {history.map((entry, index) => (
+            <div key={entry.id} className="relative">
+              {/* Timeline line */}
+              {index < history.length - 1 && (
+                <div className="absolute left-4 top-8 h-full w-px bg-border" />
+              )}
+              
+              <div className="flex gap-4">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                  <User className="h-4 w-4" />
+                </div>
+                
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">
+                        {entry.changedBy?.name || entry.changedBy?.email || 'System'}
+                      </span>
+                      <Badge variant="outline" className="text-xs">
+                        {Object.keys(entry.diff).length} change{Object.keys(entry.diff).length > 1 ? 's' : ''}
+                      </Badge>
+                    </div>
+                    <time className="text-xs text-muted-foreground">
+                      {formatDateTime(entry.changedAt)}
+                    </time>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    {Object.entries(entry.diff).map(([field, change]: [string, any]) => (
+                      <div key={field} className="rounded-lg bg-muted/50 p-3">
+                        <div className="mb-2 text-sm font-medium">
+                          {camelCaseToTitle(field)}
+                        </div>
+                        
+                        <div className="flex items-center gap-2 text-sm">
+                          {change.old !== null && change.old !== undefined && (
+                            <>
+                              <Badge variant="outline" className="text-xs">
+                                {formatChangeValue(change.old)}
+                              </Badge>
+                              <span className="text-muted-foreground">→</span>
+                            </>
+                          )}
+                          <Badge 
+                            variant={change.old === null ? "default" : "secondary"} 
+                            className="text-xs"
+                          >
+                            {formatChangeValue(change.new)}
+                          </Badge>
+                        </div>
+                        
+                        {field === 'status' && (
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            Status updated in lead pipeline
+                          </div>
+                        )}
+                        
+                        {(field === 'budgetMin' || field === 'budgetMax') && (
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            Budget range modified
+                          </div>
+                        )}
+                        
+                        {field === 'notes' && (
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            Notes updated
+                          </div>
+                        )}
+                        
+                        {field === 'tags' && (
+                          <div className="mt-1 text-xs text-muted-foreground">
+                            Tags modified
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## components\buyers\buyers-filter.tsx
+
+```tsx
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { CSVImportDialog } from './csv-import-dialog';
+import { CSVExportButton } from './csv-export-button';
+import { Upload, Download, Search, X, Filter } from 'lucide-react';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useEffect, useState } from 'react';
+
+export function BuyersFilters() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  const [search, setSearch] = useState(searchParams.get('search') || '');
+  const debouncedSearch = useDebounce(search, 300);
+
+  const updateFilters = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    params.delete('page'); // Reset to first page
+    router.push(`?${params.toString()}`);
+  };
+
+  const clearFilters = () => {
+    setSearch('');
+    router.push('/buyers');
+  };
+
+  useEffect(() => {
+    updateFilters('search', debouncedSearch);
+  }, [debouncedSearch]);
+
+  const activeFilters = Array.from(searchParams.entries()).filter(([key]) => 
+    ['search', 'city', 'propertyType', 'status', 'timeline'].includes(key) && searchParams.get(key)
+  );
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <CSVImportDialog>
+            <Button variant="outline" size="sm">
+              <Upload className="mr-2 h-4 w-4" />
+              Import CSV
+            </Button>
+          </CSVImportDialog>
+          <CSVExportButton />
+        </div>
+        {activeFilters.length > 0 && (
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">
+              {activeFilters.length} filter{activeFilters.length > 1 ? 's' : ''} active
+            </span>
+            <Button variant="ghost" size="sm" onClick={clearFilters}>
+              <X className="mr-2 h-4 w-4" />
+              Clear All
+            </Button>
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div className="md:col-span-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Search by name, phone, email..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+        </div>
+
+        <Select
+          value={searchParams.get('city') || ''}
+          onValueChange={(value) => updateFilters('city', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="All Cities" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">All Cities</SelectItem>
+            <SelectItem value="Chandigarh">Chandigarh</SelectItem>
+            <SelectItem value="Mohali">Mohali</SelectItem>
+            <SelectItem value="Zirakpur">Zirakpur</SelectItem>
+            <SelectItem value="Panchkula">Panchkula</SelectItem>
+            <SelectItem value="Other">Other</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={searchParams.get('propertyType') || ''}
+          onValueChange={(value) => updateFilters('propertyType', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="All Properties" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">All Properties</SelectItem>
+            <SelectItem value="Apartment">Apartment</SelectItem>
+            <SelectItem value="Villa">Villa</SelectItem>
+            <SelectItem value="Plot">Plot</SelectItem>
+            <SelectItem value="Office">Office</SelectItem>
+            <SelectItem value="Retail">Retail</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={searchParams.get('status') || ''}
+          onValueChange={(value) => updateFilters('status', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="All Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">All Status</SelectItem>
+            <SelectItem value="New">New</SelectItem>
+            <SelectItem value="Qualified">Qualified</SelectItem>
+            <SelectItem value="Contacted">Contacted</SelectItem>
+            <SelectItem value="Visited">Visited</SelectItem>
+            <SelectItem value="Negotiation">Negotiation</SelectItem>
+            <SelectItem value="Converted">Converted</SelectItem>
+            <SelectItem value="Dropped">Dropped</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={searchParams.get('timeline') || ''}
+          onValueChange={(value) => updateFilters('timeline', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="All Timeline" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">All Timeline</SelectItem>
+            <SelectItem value="0-3m">0-3 months</SelectItem>
+            <SelectItem value="3-6m">3-6 months</SelectItem>
+            <SelectItem value=">6m">6+ months</SelectItem>
+            <SelectItem value="Exploring">Just exploring</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Active Filters Display */}
+      {activeFilters.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {activeFilters.map(([key, value]) => (
+            <div
+              key={key}
+              className="flex items-center gap-1 bg-primary/10 text-primary px-2 py-1 rounded-md text-sm"
+            >
+              <Filter className="h-3 w-3" />
+              <span className="capitalize">{key}:</span>
+              <span className="font-medium">{value}</span>
+              <button
+                onClick={() => updateFilters(key, '')}
+                className="ml-1 hover:bg-primary/20 rounded-sm p-0.5"
+                aria-label={`Remove ${key} filter`}
+                    >
+                <X className="h-3 w-3" aria-hidden="true" />
+              </button>
+
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## components\buyers\buyers-stats.tsx
+
+```tsx
+import { getBuyersStats } from '@/lib/db/queries';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Users, 
+  UserCheck, 
+  UserX, 
+  TrendingUp, 
+  Clock, 
+  MapPin,
+  Building,
+  DollarSign
+} from 'lucide-react';
+import { formatCurrency, formatPercentage } from '@/lib/utils';
+
+interface BuyersStatsProps {
+  userId: string;
+}
+
+export async function BuyersStats({ userId }: BuyersStatsProps) {
+  const { stats, total } = await getBuyersStats(userId);
+  
+  const statusStats = stats.reduce((acc, stat) => {
+    acc[stat.status] = stat.count;
+    return acc;
+  }, {} as Record<string, number>);
+
+  const newLeads = statusStats.New || 0;
+  const qualified = statusStats.Qualified || 0;
+  const contacted = statusStats.Contacted || 0;
+  const visited = statusStats.Visited || 0;
+  const negotiation = statusStats.Negotiation || 0;
+  const converted = statusStats.Converted || 0;
+  const dropped = statusStats.Dropped || 0;
+  
+  const active = total - converted - dropped;
+  const conversionRate = total > 0 ? ((converted / total) * 100).toFixed(1) : '0';
+  const qualificationRate = total > 0 ? (((qualified + contacted + visited + negotiation + converted) / total) * 100).toFixed(1) : '0';
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Total Leads</CardTitle>
+          <Users className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{total}</div>
+          <p className="text-xs text-muted-foreground">
+            {newLeads} new this period
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Active Leads</CardTitle>
+          <UserCheck className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{active}</div>
+          <p className="text-xs text-muted-foreground">
+            Currently in pipeline
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Conversion Rate</CardTitle>
+          <TrendingUp className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{conversionRate}%</div>
+          <p className="text-xs text-muted-foreground">
+            {converted} converted leads
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-sm font-medium">Qualification Rate</CardTitle>
+          <Clock className="h-4 w-4 text-muted-foreground" />
+        </CardHeader>
+        <CardContent>
+          <div className="text-2xl font-bold">{qualificationRate}%</div>
+          <p className="text-xs text-muted-foreground">
+            Beyond initial stage
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+```
+
+## components\buyers\buyers-table-client.tsx
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
+import { 
+  MoreHorizontal, 
+  Edit, 
+  Trash2, 
+  Eye, 
+  Phone, 
+  Mail, 
+  Users,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown
+} from 'lucide-react';
+import { formatCurrency, formatDate, getStatusColor, getTimelineColor } from '@/lib/utils';
+import { useSearchParams } from 'next/navigation';
+
+interface BuyersTableClientProps {
+  data: any[];
+  userId: string;
+}
+
+export function BuyersTableClient({ data, userId }: BuyersTableClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this lead?')) return;
+    
+    setDeletingId(id);
+    try {
+      const response = await fetch(`/api/buyers/${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (response.ok) {
+        router.refresh();
+      } else {
+        alert('Failed to delete lead');
+      }
+    } catch (error) {
+      alert('Failed to delete lead');
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const handleSort = (column: string) => {
+    const currentSortBy = searchParams.get('sortBy') || 'updatedAt';
+    const currentSortOrder = searchParams.get('sortOrder') || 'desc';
+    
+    let newSortOrder = 'asc';
+    if (currentSortBy === column && currentSortOrder === 'asc') {
+      newSortOrder = 'desc';
+    }
+    
+    const params = new URLSearchParams(searchParams);
+    params.set('sortBy', column);
+    params.set('sortOrder', newSortOrder);
+    params.delete('page'); // Reset to first page
+    
+    router.push(`?${params.toString()}`);
+  };
+
+  const getSortIcon = (column: string) => {
+    const currentSortBy = searchParams.get('sortBy') || 'updatedAt';
+    const currentSortOrder = searchParams.get('sortOrder') || 'desc';
+    
+    if (currentSortBy !== column) {
+      return <ArrowUpDown className="ml-2 h-4 w-4" />;
+    }
+    
+    return currentSortOrder === 'asc' 
+      ? <ArrowUp className="ml-2 h-4 w-4" />
+      : <ArrowDown className="ml-2 h-4 w-4" />;
+  };
+
+  const handleQuickStatusUpdate = async (buyerId: string, newStatus: string) => {
+    try {
+      const response = await fetch(`/api/buyers/${buyerId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      
+      if (response.ok) {
+        router.refresh();
+      } else {
+        alert('Failed to update status');
+      }
+    } catch (error) {
+      alert('Failed to update status');
+    }
+  };
+
+  if (data.length === 0) {
+    return (
+      <div className="rounded-md border">
+        <div className="flex items-center justify-center py-16">
+          <div className="text-center">
+            <Users className="mx-auto h-12 w-12 text-muted-foreground" />
+            <h3 className="mt-4 text-lg font-semibold">No leads found</h3>
+            <p className="text-muted-foreground mb-4">
+              {searchParams.toString() ? 'Try adjusting your filters.' : 'Get started by adding your first buyer lead.'}
+            </p>
+            <Button asChild>
+              <Link href="/buyers/new">Add Lead</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-md border">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('fullName')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Name
+                {getSortIcon('fullName')}
+              </Button>
+            </TableHead>
+            <TableHead>Contact</TableHead>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('city')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Location
+                {getSortIcon('city')}
+              </Button>
+            </TableHead>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('propertyType')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Property
+                {getSortIcon('propertyType')}
+              </Button>
+            </TableHead>
+            <TableHead>Budget Range</TableHead>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('timeline')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Timeline
+                {getSortIcon('timeline')}
+              </Button>
+            </TableHead>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('status')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Status
+                {getSortIcon('status')}
+              </Button>
+            </TableHead>
+            <TableHead>
+              <Button
+                variant="ghost"
+                onClick={() => handleSort('updatedAt')}
+                className="h-auto p-0 font-semibold hover:bg-transparent"
+              >
+                Updated
+                {getSortIcon('updatedAt')}
+              </Button>
+            </TableHead>
+            <TableHead className="w-[50px]"></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map((buyer) => (
+            <TableRow key={buyer.id} className="hover:bg-muted/50">
+              <TableCell>
+                <div>
+                  <div className="font-medium">{buyer.fullName}</div>
+                  {buyer.tags && buyer.tags.length > 0 && (
+                    <div className="flex gap-1 mt-1">
+                      {buyer.tags.slice(0, 2).map((tag: string) => (
+                        <Badge key={tag} variant="outline" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                      {buyer.tags.length > 2 && (
+                        <Badge variant="outline" className="text-xs">
+                          +{buyer.tags.length - 2}
+                        </Badge>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1 text-sm">
+                    <Phone className="h-3 w-3" />
+                    {buyer.phone}
+                  </div>
+                  {buyer.email && (
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Mail className="h-3 w-3" />
+                      {buyer.email}
+                    </div>
+                  )}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="text-sm">{buyer.city}</div>
+              </TableCell>
+              <TableCell>
+                <div>
+                  <div className="text-sm font-medium">{buyer.propertyType}</div>
+                  {buyer.bhk && (
+                    <div className="text-xs text-muted-foreground">
+                      {buyer.bhk} BHK • {buyer.purpose}
+                    </div>
+                  )}
+                  {!buyer.bhk && (
+                    <div className="text-xs text-muted-foreground">
+                      {buyer.purpose}
+                    </div>
+                  )}
+                </div>
+              </TableCell>
+              <TableCell>
+                {buyer.budgetMin || buyer.budgetMax ? (
+                  <div className="text-sm">
+                    {buyer.budgetMin && formatCurrency(buyer.budgetMin)}
+                    {buyer.budgetMin && buyer.budgetMax && ' - '}
+                    {buyer.budgetMax && formatCurrency(buyer.budgetMax)}
+                  </div>
+                ) : (
+                  <span className="text-xs text-muted-foreground">Not specified</span>
+                )}
+              </TableCell>
+              <TableCell>
+                <Badge className={getTimelineColor(buyer.timeline)} variant="secondary">
+                  {buyer.timeline}
+                </Badge>
+              </TableCell>
+              <TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Badge 
+                      className={getStatusColor(buyer.status)} 
+                      variant="secondary"
+                      role="button"
+                    >
+                      {buyer.status}
+                    </Badge>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {['New', 'Qualified', 'Contacted', 'Visited', 'Negotiation', 'Converted', 'Dropped'].map((status) => (
+                      <DropdownMenuItem
+                        key={status}
+                        onClick={() => handleQuickStatusUpdate(buyer.id, status)}
+                        disabled={buyer.ownerId !== userId}
+                      >
+                        {status}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+              <TableCell>
+                <div className="text-xs text-muted-foreground">
+                  {formatDate(buyer.updatedAt)}
+                </div>
+              </TableCell>
+              <TableCell>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                      <span className="sr-only">Open menu</span>
+                      <MoreHorizontal className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem asChild>
+                      <Link href={`/buyers/${buyer.id}`}>
+                        <Eye className="mr-2 h-4 w-4" />
+                        View Details
+                      </Link>
+                    </DropdownMenuItem>
+                    {buyer.ownerId === userId && (
+                      <>
+                        <DropdownMenuItem asChild>
+                          <Link href={`/buyers/${buyer.id}`}>
+                            <Edit className="mr-2 h-4 w-4" />
+                            Edit
+                          </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => handleDelete(buyer.id)}
+                          disabled={deletingId === buyer.id}
+                          className="text-destructive focus:text-destructive"
+                        >
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          Delete
+                        </DropdownMenuItem>
+                      </>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+```
+
+## components\buyers\buyers-table.tsx
+
+```tsx
+import { getBuyers } from '@/lib/db/queries';
+import { buyerFiltersSchema } from '@/lib/validations/buyer';
+import { BuyersTableClient } from './buyers-table-client';
+import { Pagination } from '@/components/ui/pagination';
+
+interface BuyersTableProps {
+  searchParams: any;
+  userId: string;
+}
+
+export async function BuyersTable({ searchParams, userId }: BuyersTableProps) {
+  const filters = buyerFiltersSchema.parse({
+    search: searchParams.search,
+    city: searchParams.city,
+    propertyType: searchParams.propertyType,
+    status: searchParams.status,
+    timeline: searchParams.timeline,
+    page: parseInt(searchParams.page || '1'),
+    limit: parseInt(searchParams.limit || '10'),
+    sortBy: searchParams.sortBy || 'updatedAt',
+    sortOrder: searchParams.sortOrder || 'desc',
+  });
+
+  const result = await getBuyers(filters);
+
+  return (
+    <div className="space-y-4">
+      <BuyersTableClient data={result.data} userId={userId} />
+      <Pagination
+        currentPage={result.page}
+        totalPages={result.totalPages}
+        totalItems={result.total}
+      />
+    </div>
+  );
+}
+```
+
+## components\buyers\csv-export-button.tsx
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+
+export function CSVExportButton() {
+  const [exporting, setExporting] = useState(false);
+  const searchParams = useSearchParams();
+
+  const handleExport = async () => {
+    setExporting(true);
+    
+    try {
+      // Build URL with current filters
+      const params = new URLSearchParams();
+      searchParams.forEach((value, key) => {
+        params.append(key, value);
+      });
+
+      const response = await fetch(`/api/buyers/export?${params.toString()}`);
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `buyers-${new Date().toISOString().split('T')[0]}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      } else {
+        throw new Error('Export failed');
+      }
+    } catch (error) {
+      console.error('Export error:', error);
+      // You might want to show a toast notification here
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  return (
+    <Button
+      variant="outline"
+      onClick={handleExport}
+      disabled={exporting}
+    >
+      {exporting ? (
+        <>
+          <Download className="mr-2 h-4 w-4 animate-spin" />
+          Exporting...
+        </>
+      ) : (
+        <>
+          <Download className="mr-2 h-4 w-4" />
+          Export CSV
+        </>
+      )}
+    </Button>
+  );
+}
+```
+
+## components\layout\header.tsx
+
+```tsx
+'use client';
+
+import { signOut } from 'next-auth/react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { 
+  LogOut, 
+  User, 
+  Settings, 
+  Bell,
+  Search,
+  Menu,
+  HelpCircle
+} from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { getInitials } from '@/lib/utils';
+
+interface HeaderProps {
+  user: {
+    id?: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    role?: string;
+  };
+}
+
+export function Header({ user }: HeaderProps) {
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
+
+  return (
+    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex h-16 items-center justify-between px-6">
+        {/* Mobile menu button */}
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+          >
+            <Menu className="h-4 w-4" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
+          
+          <div className="hidden md:block">
+            <h2 className="text-lg font-semibold text-foreground">
+              Lead Management
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Manage your real estate buyer leads
+            </p>
+          </div>
+        </div>
+
+        {/* Search Bar - Hidden on mobile */}
+        <div className="hidden md:flex flex-1 max-w-md mx-8">
+          <div className="relative w-full">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Quick search leads..."
+              className="pl-9 pr-4"
+            />
+          </div>
+        </div>
+
+        {/* Right side - Notifications & User Menu */}
+        <div className="flex items-center gap-3">
+          {/* Notifications */}
+          <Button variant="ghost" size="icon" className="relative">
+            <Bell className="h-4 w-4" />
+            <Badge 
+              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs"
+              variant="destructive"
+            >
+              3
+            </Badge>
+            <span className="sr-only">Notifications</span>
+          </Button>
+
+          {/* Help */}
+          <Button variant="ghost" size="icon">
+            <HelpCircle className="h-4 w-4" />
+            <span className="sr-only">Help</span>
+          </Button>
+
+          {/* User Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                <Avatar className="h-10 w-10">
+                  <AvatarImage src={user.image || ''} alt={user.name || ''} />
+                  <AvatarFallback className="bg-primary text-primary-foreground">
+                    {user.name ? getInitials(user.name) : user.email?.charAt(0).toUpperCase() || 'U'}
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-64" align="end" forceMount>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-2">
+                  <div className="flex items-center gap-2">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={user.image || ''} />
+                      <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                        {user.name ? getInitials(user.name) : user.email?.charAt(0).toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      {user.name && (
+                        <p className="text-sm font-medium leading-none">{user.name}</p>
+                      )}
+                      {user.email && (
+                        <p className="text-xs leading-none text-muted-foreground mt-1">
+                          {user.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  {user.role && (
+                    <Badge variant={user.role === 'admin' ? 'default' : 'secondary'} className="w-fit">
+                      {user.role === 'admin' ? 'Administrator' : 'User'}
+                    </Badge>
+                  )}
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="cursor-pointer">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem 
+                className="cursor-pointer text-destructive focus:text-destructive" 
+                onClick={handleSignOut}
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      </div>
+
+      {/* Mobile search bar */}
+      <div className="border-t px-6 py-3 md:hidden">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Quick search leads..."
+            className="pl-9 pr-4"
+          />
+        </div>
+      </div>
+    </header>
+  );
+}
+```
+
+## components\layout\sidebar.tsx
+
+```tsx
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { 
+  Users, 
+  PlusCircle, 
+  BarChart3, 
+  FileText, 
+  Settings,
+  Home,
+  Database,
+  Download,
+  Upload
+} from 'lucide-react';
+
+const navigation = [
+  {
+    name: 'Dashboard',
+    href: '/buyers',
+    icon: Home,
+    description: 'Overview and stats',
+  },
+  {
+    name: 'All Leads',
+    href: '/buyers',
+    icon: Users,
+    description: 'View all buyer leads',
+  },
+  {
+    name: 'Add Lead',
+    href: '/buyers/new',
+    icon: PlusCircle,
+    description: 'Create new lead',
+  },
+];
+
+const tools = [
+  {
+    name: 'Import Data',
+    href: '/buyers?import=true',
+    icon: Upload,
+    description: 'Import from CSV',
+  },
+  {
+    name: 'Export Data',
+    href: '/buyers?export=true',
+    icon: Download,
+    description: 'Export to CSV',
+  },
+];
+
+const secondary = [
+  {
+    name: 'Analytics',
+    href: '/analytics',
+    icon: BarChart3,
+    disabled: true,
+    description: 'Coming soon',
+  },
+  {
+    name: 'Reports',
+    href: '/reports',
+    icon: FileText,
+    disabled: true,
+    description: 'Coming soon',
+  },
+  {
+    name: 'Settings',
+    href: '/settings',
+    icon: Settings,
+    disabled: true,
+    description: 'Coming soon',
+  },
+];
+
+export function Sidebar() {
+  const pathname = usePathname();
+
+  return (
+    <div className="flex h-full w-64 flex-col bg-white border-r border-gray-200">
+      {/* Logo/Brand */}
+      <div className="flex h-16 items-center border-b border-gray-200 px-6">
+        <div className="flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <Database className="h-4 w-4" />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold text-gray-900">Lead Intake</h1>
+            <p className="text-xs text-gray-500">Real Estate CRM</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 space-y-1 p-4">
+        {/* Main Navigation */}
+        <div>
+          <h2 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            Main
+          </h2>
+          {navigation.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href || 
+              (item.href === '/buyers' && pathname.startsWith('/buyers'));
+            
+            return (
+              <Button
+                key={item.name}
+                asChild
+                variant={isActive ? 'secondary' : 'ghost'}
+                className={cn(
+                  'w-full justify-start h-auto p-3',
+                  isActive && 'bg-primary/10 text-primary border border-primary/20'
+                )}
+              >
+                <Link href={item.href}>
+                  <Icon className="mr-3 h-4 w-4" />
+                  <div className="text-left">
+                    <div className="font-medium">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {item.description}
+                    </div>
+                  </div>
+                </Link>
+              </Button>
+            );
+          })}
+        </div>
+
+        <Separator className="my-4" />
+
+        {/* Tools */}
+        <div>
+          <h2 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            Tools
+          </h2>
+          {tools.map((item) => {
+            const Icon = item.icon;
+            
+            return (
+              <Button
+                key={item.name}
+                asChild
+                variant="ghost"
+                className="w-full justify-start h-auto p-3"
+              >
+                <Link href={item.href}>
+                  <Icon className="mr-3 h-4 w-4" />
+                  <div className="text-left">
+                    <div className="font-medium">{item.name}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {item.description}
+                    </div>
+                  </div>
+                </Link>
+              </Button>
+            );
+          })}
+        </div>
+
+        <Separator className="my-4" />
+
+        {/* Secondary Navigation */}
+        <div>
+          <h2 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+            More
+          </h2>
+          {secondary.map((item) => {
+            const Icon = item.icon;
+            
+            return (
+              <Button
+                key={item.name}
+                asChild={!item.disabled}
+                variant="ghost"
+                className={cn(
+                  'w-full justify-start h-auto p-3',
+                  item.disabled && 'opacity-50 cursor-not-allowed'
+                )}
+                disabled={item.disabled}
+              >
+                {item.disabled ? (
+                  <div className="flex items-start">
+                    <Icon className="mr-3 h-4 w-4 mt-0.5" />
+                    <div className="text-left">
+                      <div className="font-medium">{item.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {item.description}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link href={item.href}>
+                    <Icon className="mr-3 h-4 w-4 mt-0.5" />
+                    <div className="text-left">
+                      <div className="font-medium">{item.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {item.description}
+                      </div>
+                    </div>
+                  </Link>
+                )}
+              </Button>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Footer */}
+      <div className="border-t border-gray-200 p-4">
+        <div className="text-center text-xs text-gray-500">
+          <p>Buyer Lead Intake v1.0</p>
+          <p className="mt-1">Built with Next.js</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## components\ui\alert.tsx
+
+```tsx
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const alertVariants = cva(
+  'relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg~*]:pl-7',
+  {
+    variants: {
+      variant: {
+        default: 'bg-background text-foreground',
+        destructive:
+          'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
+        warning:
+          'border-yellow-200 bg-yellow-50 text-yellow-800 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-300 [&>svg]:text-yellow-600 dark:[&>svg]:text-yellow-300',
+        success:
+          'border-green-200 bg-green-50 text-green-800 dark:border-green-800 dark:bg-green-950 dark:text-green-300 [&>svg]:text-green-600 dark:[&>svg]:text-green-300',
+        info:
+          'border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-300 [&>svg]:text-blue-600 dark:[&>svg]:text-blue-300',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
+
+const Alert = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
+>(({ className, variant, ...props }, ref) => (
+  <div
+    ref={ref}
+    role="alert"
+    className={cn(alertVariants({ variant }), className)}
+    {...props}
+  />
+));
+Alert.displayName = 'Alert';
+
+const AlertTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h5
+    ref={ref}
+    className={cn('mb-1 font-medium leading-none tracking-tight', className)}
+    {...props}
+  />
+));
+AlertTitle.displayName = 'AlertTitle';
+
+const AlertDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn('text-sm [&_p]:leading-relaxed', className)}
+    {...props}
+  />
+));
+AlertDescription.displayName = 'AlertDescription';
+
+export { Alert, AlertTitle, AlertDescription };
+
+// Usage examples and stories for the Alert component
+
+// Example 1: Basic Alert
+/*
+<Alert>
+  <AlertCircle className="h-4 w-4" />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components and dependencies to your app using the cli.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 2: Destructive Alert (Error)
+/*
+<Alert variant="destructive">
+  <AlertTriangle className="h-4 w-4" />
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>
+    Your session has expired. Please log in again.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 3: Warning Alert
+/*
+<Alert variant="warning">
+  <AlertTriangle className="h-4 w-4" />
+  <AlertTitle>Warning</AlertTitle>
+  <AlertDescription>
+    This action cannot be undone. This will permanently delete your data.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 4: Success Alert
+/*
+<Alert variant="success">
+  <CheckCircle className="h-4 w-4" />
+  <AlertTitle>Success!</AlertTitle>
+  <AlertDescription>
+    Your buyer lead has been successfully created.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 5: Info Alert
+/*
+<Alert variant="info">
+  <Info className="h-4 w-4" />
+  <AlertTitle>Information</AlertTitle>
+  <AlertDescription>
+    CSV import supports up to 200 rows per file.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 6: Simple Alert without title
+/*
+<Alert>
+  <AlertDescription>
+    A new software update is available. See what's new in version 2.0.4.
+  </AlertDescription>
+</Alert>
+*/
+
+// Example 7: Alert with custom styling
+/*
+<Alert className="border-l-4 border-l-blue-500">
+  <Info className="h-4 w-4" />
+  <AlertDescription>
+    This is a custom styled alert with a left border accent.
+  </AlertDescription>
+</Alert>
+*/
+```
+
+## components\ui\avatar.tsx
+
+```tsx
+import * as React from 'react';
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import { cn } from '@/lib/utils';
+
+const Avatar = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Root
+    ref={ref}
+    className={cn(
+      'relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full',
+      className
+    )}
+    {...props}
+  />
+));
+Avatar.displayName = AvatarPrimitive.Root.displayName;
+
+const AvatarImage = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Image>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Image
+    ref={ref}
+    className={cn('aspect-square h-full w-full', className)}
+    {...props}
+  />
+));
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
+
+const AvatarFallback = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Fallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Fallback
+    ref={ref}
+    className={cn(
+      'flex h-full w-full items-center justify-center rounded-full bg-muted',
+      className
+    )}
+    {...props}
+  />
+));
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
+
+export { Avatar, AvatarImage, AvatarFallback };
+```
+
+## components\ui\badge.tsx
+
+```tsx
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const badgeVariants = cva(
+  'inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
+  {
+    variants: {
+      variant: {
+        default:
+          'border-transparent bg-primary text-primary-foreground hover:bg-primary/80',
+        secondary:
+          'border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        destructive:
+          'border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
+        outline: 'text-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
+
+export interface BadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof badgeVariants> {}
+
+function Badge({ className, variant, ...props }: BadgeProps) {
+  return (
+    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+  );
+}
+
+export { Badge, badgeVariants };
+```
+
+## components\ui\button.tsx
+
+```tsx
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        destructive:
+          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+        outline:
+          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        link: 'text-primary underline-offset-4 hover:underline',
+      },
+      size: {
+        default: 'h-10 px-4 py-2',
+        sm: 'h-9 rounded-md px-3',
+        lg: 'h-11 rounded-md px-8',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+);
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = 'Button';
+
+export { Button, buttonVariants };
+```
+
+## components\ui\card.tsx
+
+```tsx
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      'rounded-lg border bg-card text-card-foreground shadow-sm',
+      className
+    )}
+    {...props}
+  />
+));
+Card.displayName = 'Card';
+
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn('flex flex-col space-y-1.5 p-6', className)}
+    {...props}
+  />
+));
+CardHeader.displayName = 'CardHeader';
+
+const CardTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn(
+      'text-2xl font-semibold leading-none tracking-tight',
+      className
+    )}
+    {...props}
+  />
+));
+CardTitle.displayName = 'CardTitle';
+
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn('text-sm text-muted-foreground', className)}
+    {...props}
+  />
+));
+CardDescription.displayName = 'CardDescription';
+
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
+));
+CardContent.displayName = 'CardContent';
+
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn('flex items-center p-6 pt-0', className)}
+    {...props}
+  />
+));
+CardFooter.displayName = 'CardFooter';
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+```
+
+## components\ui\dropdown-menu.tsx
+
+```tsx
+import * as React from 'react';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { Check, ChevronRight, Circle } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const DropdownMenu = DropdownMenuPrimitive.Root;
+
+const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
+
+const DropdownMenuGroup = DropdownMenuPrimitive.Group;
+
+const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
+
+const DropdownMenuSub = DropdownMenuPrimitive.Sub;
+
+const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
+
+const DropdownMenuSubTrigger = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean;
+  }
+>(({ className, inset, children, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubTrigger
+    ref={ref}
+    className={cn(
+      'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent',
+      inset && 'pl-8',
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <ChevronRight className="ml-auto h-4 w-4" />
+  </DropdownMenuPrimitive.SubTrigger>
+));
+DropdownMenuSubTrigger.displayName =
+  DropdownMenuPrimitive.SubTrigger.displayName;
+
+const DropdownMenuSubContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
+>(({ className, ...props }, ref) => (
+  <DropdownMenuPrimitive.SubContent
+    ref={ref}
+    className={cn(
+      'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+      className
+    )}
+    {...props}
+  />
+));
+DropdownMenuSubContent.displayName =
+  DropdownMenuPrimitive.SubContent.displayName;
+
+const DropdownMenuContent = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
+>(({ className, sideOffset = 4, ...props }, ref) => (
+  <DropdownMenuPrimitive.Portal>
+    <DropdownMenuPrimitive.Content
+      ref={ref}
+      sideOffset={sideOffset}
+      className={cn(
+        'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        className
+      )}
+      {...props}
+    />
+  </DropdownMenuPrimitive.Portal>
+));
+DropdownMenuContent.displayName = DropdownMenuPrimitive.Content.displayName;
+
+const DropdownMenuItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item> & {
+    inset?: boolean;
+  }
+>(({ className, inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.Item
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      inset && 'pl-8',
+      className
+    )}
+    {...props}
+  />
+));
+DropdownMenuItem.displayName = DropdownMenuPrimitive.Item.displayName;
+
+const DropdownMenuCheckboxItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.CheckboxItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.CheckboxItem>
+>(({ className, children, checked, ...props }, ref) => (
+  <DropdownMenuPrimitive.CheckboxItem
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className
+    )}
+    checked={checked}
+    {...props}
+  >
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <DropdownMenuPrimitive.ItemIndicator>
+        <Check className="h-4 w-4" />
+      </DropdownMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </DropdownMenuPrimitive.CheckboxItem>
+));
+DropdownMenuCheckboxItem.displayName =
+  DropdownMenuPrimitive.CheckboxItem.displayName;
+
+const DropdownMenuRadioItem = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
+>(({ className, children, ...props }, ref) => (
+  <DropdownMenuPrimitive.RadioItem
+    ref={ref}
+    className={cn(
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className
+    )}
+    {...props}
+  >
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <DropdownMenuPrimitive.ItemIndicator>
+        <Circle className="h-2 w-2 fill-current" />
+      </DropdownMenuPrimitive.ItemIndicator>
+    </span>
+    {children}
+  </DropdownMenuPrimitive.RadioItem>
+));
+DropdownMenuRadioItem.displayName = DropdownMenuPrimitive.RadioItem.displayName;
+
+const DropdownMenuLabel = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Label> & {
+    inset?: boolean;
+  }
+>(({ className, inset, ...props }, ref) => (
+  <DropdownMenuPrimitive.Label
+    ref={ref}
+    className={cn(
+      'px-2 py-1.5 text-sm font-semibold',
+      inset && 'pl-8',
+      className
+    )}
+    {...props}
+  />
+));
+DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName;
+
+const DropdownMenuSeparator = React.forwardRef<
+  React.ElementRef<typeof DropdownMenuPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <DropdownMenuPrimitive.Separator
+    ref={ref}
+    className={cn('-mx-1 my-1 h-px bg-muted', className)}
+    {...props}
+  />
+));
+DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
+
+const DropdownMenuShortcut = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>) => {
+  return (
+    <span
+      className={cn('ml-auto text-xs tracking-widest opacity-60', className)}
+      {...props}
+    />
+  );
+};
+DropdownMenuShortcut.displayName = 'DropdownMenuShortcut';
+
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+};
+```
+
+## components\ui\input.tsx
+
+```tsx
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Input.displayName = 'Input';
+
+export { Input };
+```
+
+## components\ui\label.tsx
+
+```tsx
+import * as React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+const labelVariants = cva(
+  'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+);
+
+const Label = React.forwardRef<
+  React.ElementRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
+    VariantProps<typeof labelVariants>
+>(({ className, ...props }, ref) => (
+  <LabelPrimitive.Root
+    ref={ref}
+    className={cn(labelVariants(), className)}
+    {...props}
+  />
+));
+Label.displayName = LabelPrimitive.Root.displayName;
+
+export { Label };
+```
+
+## components\ui\pagination.tsx
+
+```tsx
+'use client';
+
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Button } from './button';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  ChevronsLeft, 
+  ChevronsRight,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage?: number;
+  showFirstLast?: boolean;
+  showPageNumbers?: boolean;
+  className?: string;
+}
+
+export function Pagination({ 
+  currentPage, 
+  totalPages, 
+  totalItems,
+  itemsPerPage = 10,
+  showFirstLast = true,
+  showPageNumbers = true,
+  className 
+}: PaginationProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const updatePage = (page: number) => {
+    const params = new URLSearchParams(searchParams);
+    if (page > 1) {
+      params.set('page', page.toString());
+    } else {
+      params.delete('page');
+    }
+    router.push(`?${params.toString()}`);
+  };
+
+  // Calculate visible page numbers with dots
+  const getVisiblePages = () => {
+    const delta = 2;
+    const range: (number | string)[] = [];
+    const rangeWithDots: (number | string)[] = [];
+
+    for (let i = Math.max(2, currentPage - delta); 
+         i <= Math.min(totalPages - 1, currentPage + delta); 
+         i++) {
+      range.push(i);
+    }
+
+    if (currentPage - delta > 2) {
+      rangeWithDots.push(1, '...');
+    } else {
+      rangeWithDots.push(1);
+    }
+
+    rangeWithDots.push(...range);
+
+    if (currentPage + delta < totalPages - 1) {
+      rangeWithDots.push('...', totalPages);
+    } else {
+      if (totalPages > 1) {
+        rangeWithDots.push(totalPages);
+      }
+    }
+
+    return rangeWithDots;
+  };
+
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+  if (totalPages <= 1) {
+    return null;
+  }
+
+  return (
+    <div className={cn('flex items-center justify-between', className)}>
+      {/* Items info */}
+      <div className="text-sm text-muted-foreground">
+        Showing {startItem} to {endItem} of {totalItems} results
+      </div>
+
+      {/* Pagination controls */}
+      <div className="flex items-center space-x-2">
+        {/* First page */}
+        {showFirstLast && (
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => updatePage(1)}
+            disabled={currentPage <= 1}
+            className="h-8 w-8"
+          >
+            <ChevronsLeft className="h-4 w-4" />
+            <span className="sr-only">First page</span>
+          </Button>
+        )}
+
+        {/* Previous page */}
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => updatePage(currentPage - 1)}
+          disabled={currentPage <= 1}
+          className="h-8 w-8"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          <span className="sr-only">Previous page</span>
+        </Button>
+
+        {/* Page numbers */}
+        {showPageNumbers &&
+          getVisiblePages().map((page, idx) =>
+            page === '...' ? (
+              <span key={idx} className="px-2 text-muted-foreground">
+                ...
+              </span>
+            ) : (
+              <Button
+                key={idx}
+                variant={page === currentPage ? 'default' : 'outline'}
+                size="icon"
+                onClick={() => updatePage(page as number)}
+                className="h-8 w-8"
+              >
+                {page}
+              </Button>
+            )
+          )}
+
+        {/* Next page */}
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => updatePage(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+          className="h-8 w-8"
+        >
+          <ChevronRight className="h-4 w-4" />
+          <span className="sr-only">Next page</span>
+        </Button>
+
+        {/* Last page */}
+        {showFirstLast && (
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => updatePage(totalPages)}
+            disabled={currentPage >= totalPages}
+            className="h-8 w-8"
+          >
+            <ChevronsRight className="h-4 w-4" />
+            <span className="sr-only">Last page</span>
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+```
+
+## components\ui\select.tsx
+
+```tsx
+import * as React from 'react';
+import * as SelectPrimitive from '@radix-ui/react-select';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const Select = SelectPrimitive.Root;
+
+const SelectGroup = SelectPrimitive.Group;
+
+const SelectValue = SelectPrimitive.Value;
+
+const SelectTrigger = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <SelectPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      className
+    )}
+    {...props}
+  >
+    {children}
+    <SelectPrimitive.Icon asChild>
+      <ChevronDown className="h-4 w-4 opacity-50" />
+    </SelectPrimitive.Icon>
+  </SelectPrimitive.Trigger>
+));
+SelectTrigger.displayName = SelectPrimitive.Trigger.displayName;
+
+const SelectScrollUpButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollUpButton>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.ScrollUpButton
+    ref={ref}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className
+    )}
+    {...props}
+  >
+    <ChevronUp className="h-4 w-4" />
+  </SelectPrimitive.ScrollUpButton>
+));
+SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
+
+const SelectScrollDownButton = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.ScrollDownButton>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.ScrollDownButton
+    ref={ref}
+    className={cn(
+      'flex cursor-default items-center justify-center py-1',
+      className
+    )}
+    {...props}
+  >
+    <ChevronDown className="h-4 w-4" />
+  </SelectPrimitive.ScrollDownButton>
+));
+SelectScrollDownButton.displayName =
+  SelectPrimitive.ScrollDownButton.displayName;
+
+const SelectContent = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
+>(({ className, children, position = 'popper', ...props }, ref) => (
+  <SelectPrimitive.Portal>
+    <SelectPrimitive.Content
+      ref={ref}
+      className={cn(
+        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
+        position === 'popper' &&
+          'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+        className
+      )}
+      position={position}
+      {...props}
+    >
+      <SelectScrollUpButton />
+      <SelectPrimitive.Viewport
+        className={cn(
+          'p-1',
+          position === 'popper' &&
+            'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]'
+        )}
+      >
+        {children}
+      </SelectPrimitive.Viewport>
+      <SelectScrollDownButton />
+    </SelectPrimitive.Content>
+  </SelectPrimitive.Portal>
+));
+SelectContent.displayName = SelectPrimitive.Content.displayName;
+
+const SelectLabel = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Label
+    ref={ref}
+    className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)}
+    {...props}
+  />
+));
+SelectLabel.displayName = SelectPrimitive.Label.displayName;
+
+const SelectItem = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
+>(({ className, children, ...props }, ref) => (
+  <SelectPrimitive.Item
+    ref={ref}
+    className={cn(
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      className
+    )}
+    {...props}
+  >
+    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <SelectPrimitive.ItemIndicator>
+        <Check className="h-4 w-4" />
+      </SelectPrimitive.ItemIndicator>
+    </span>
+
+    <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+  </SelectPrimitive.Item>
+));
+SelectItem.displayName = SelectPrimitive.Item.displayName;
+
+const SelectSeparator = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Separator>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>
+>(({ className, ...props }, ref) => (
+  <SelectPrimitive.Separator
+    ref={ref}
+    className={cn('-mx-1 my-1 h-px bg-muted', className)}
+    {...props}
+  />
+));
+SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
+
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+};
+```
+
+## components\ui\separator.tsx
+
+```tsx
+import * as React from 'react';
+import * as SeparatorPrimitive from '@radix-ui/react-separator';
+import { cn } from '@/lib/utils';
+
+const Separator = React.forwardRef<
+  React.ElementRef<typeof SeparatorPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>
+>(
+  (
+    { className, orientation = 'horizontal', decorative = true, ...props },
+    ref
+  ) => (
+    <SeparatorPrimitive.Root
+      ref={ref}
+      decorative={decorative}
+      orientation={orientation}
+      className={cn(
+        'shrink-0 bg-border',
+        orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+        className
+      )}
+      {...props}
+    />
+  )
+);
+Separator.displayName = SeparatorPrimitive.Root.displayName;
+
+export { Separator };
+```
+
+## components\ui\table.tsx
+
+```tsx
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+
+const Table = React.forwardRef<
+  HTMLTableElement,
+  React.HTMLAttributes<HTMLTableElement>
+>(({ className, ...props }, ref) => (
+  <div className="relative w-full overflow-auto">
+    <table
+      ref={ref}
+      className={cn('w-full caption-bottom text-sm', className)}
+      {...props}
+    />
+  </div>
+));
+Table.displayName = 'Table';
+
+const TableHeader = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <thead ref={ref} className={cn('[&_tr]:border-b', className)} {...props} />
+));
+TableHeader.displayName = 'TableHeader';
+
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody
+    ref={ref}
+    className={cn('[&_tr:last-child]:border-0', className)}
+    {...props}
+  />
+));
+TableBody.displayName = 'TableBody';
+
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn(
+      'border-t bg-muted/50 font-medium [&>tr]:last:border-b-0',
+      className
+    )}
+    {...props}
+  />
+));
+TableFooter.displayName = 'TableFooter';
+
+const TableRow = React.forwardRef<
+  HTMLTableRowElement,
+  React.HTMLAttributes<HTMLTableRowElement>
+>(({ className, ...props }, ref) => (
+  <tr
+    ref={ref}
+    className={cn(
+      'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+      className
+    )}
+    {...props}
+  />
+));
+TableRow.displayName = 'TableRow';
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      'h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0',
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = 'TableHead';
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn('p-4 align-middle [&:has([role=checkbox])]:pr-0', className)}
+    {...props}
+  />
+));
+TableCell.displayName = 'TableCell';
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption
+    ref={ref}
+    className={cn('mt-4 text-sm text-muted-foreground', className)}
+    {...props}
+  />
+));
+TableCaption.displayName = 'TableCaption';
+
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+};
+
+```
+
+## components\ui\tabs.tsx
+
+```tsx
+import * as React from 'react';
+import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { cn } from '@/lib/utils';
+
+const Tabs = TabsPrimitive.Root;
+
+const TabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.List
+    ref={ref}
+    className={cn(
+      'inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground',
+      className
+    )}
+    {...props}
+  />
+));
+TabsList.displayName = TabsPrimitive.List.displayName;
+
+const TabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
+      className
+    )}
+    {...props}
+  />
+));
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+
+const TabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn(
+      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      className
+    )}
+    {...props}
+  />
+));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
+
+export { Tabs, TabsList, TabsTrigger, TabsContent };
+```
+
+## components\ui\textarea.tsx
+
+```tsx
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <textarea
+        className={cn(
+          'flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Textarea.displayName = 'Textarea';
+
+export { Textarea };
+```
+
+## components\ui\toast.tsx
+
+```tsx
+import * as React from 'react';
+import * as ToastPrimitives from '@radix-ui/react-toast';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const ToastProvider = ToastPrimitives.Provider;
+
+const ToastViewport = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Viewport>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Viewport
+    ref={ref}
+    className={cn(
+      'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]',
+      className
+    )}
+    {...props}
+  />
+));
+ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
+
+const toastVariants = cva(
+  'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border p-6 pr-8 shadow-lg transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full',
+  {
+    variants: {
+      variant: {
+        default: 'border bg-background text-foreground',
+        destructive:
+          'destructive border-destructive bg-destructive text-destructive-foreground',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+);
+
+const Toast = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> &
+    VariantProps<typeof toastVariants>
+>(({ className, variant, ...props }, ref) => {
+  return (
+    <ToastPrimitives.Root
+      ref={ref}
+      className={cn(toastVariants({ variant }), className)}
+      {...props}
+    />
+  );
+});
+Toast.displayName = ToastPrimitives.Root.displayName;
+
+const ToastAction = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Action>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Action
+    ref={ref}
+    className={cn(
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive',
+      className
+    )}
+    {...props}
+  />
+));
+ToastAction.displayName = ToastPrimitives.Action.displayName;
+
+const ToastClose = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Close>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Close
+    ref={ref}
+    className={cn(
+      'absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600',
+      className
+    )}
+    toast-close=""
+    {...props}
+  >
+    <X className="h-4 w-4" />
+  </ToastPrimitives.Close>
+));
+ToastClose.displayName = ToastPrimitives.Close.displayName;
+
+const ToastTitle = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Title>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Title
+    ref={ref}
+    className={cn('text-sm font-semibold', className)}
+    {...props}
+  />
+));
+ToastTitle.displayName = ToastPrimitives.Title.displayName;
+
+const ToastDescription = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitives.Description>,
+  React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
+>(({ className, ...props }, ref) => (
+  <ToastPrimitives.Description
+    ref={ref}
+    className={cn('text-sm opacity-90', className)}
+    {...props}
+  />
+));
+ToastDescription.displayName = ToastPrimitives.Description.displayName;
+
+type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>;
+
+type ToastActionElement = React.ReactElement<typeof ToastAction>;
+
+export {
+  type ToastProps,
+  type ToastActionElement,
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  ToastAction,
+};
+```
+
+## components\ui\toaster.tsx
+
+```tsx
+'use client';
+
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
+} from '@/components/ui/toast';
+import { useToast } from '@/components/ui/use-toast';
+
+export function Toaster() {
+  const { toasts } = useToast();
+
+  return (
+    <ToastProvider>
+      {toasts.map(function ({ id, title, description, action, ...props }) {
+        return (
+          <Toast key={id} {...props}>
+            <div className="grid gap-1">
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && (
+                <ToastDescription>{description}</ToastDescription>
+              )}
+            </div>
+            {action}
+            <ToastClose />
+          </Toast>
+        );
+      })}
+      <ToastViewport />
+    </ToastProvider>
+  );
+}
+```
+
+## components\ui\use-toast.tsx
+
+```tsx
+import * as React from 'react';
+import type {
+  ToastActionElement,
+  ToastProps,
+} from '@/components/ui/toast';
+
+const TOAST_LIMIT = 1;
+const TOAST_REMOVE_DELAY = 1000000;
+
+type ToasterToast = ToastProps & {
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: ToastActionElement;
+};
+
+const actionTypes = {
+  ADD_TOAST: 'ADD_TOAST',
+  UPDATE_TOAST: 'UPDATE_TOAST',
+  DISMISS_TOAST: 'DISMISS_TOAST',
+  REMOVE_TOAST: 'REMOVE_TOAST',
+} as const;
+
+let count = 0;
+
+function genId() {
+  count = (count + 1) % Number.MAX_SAFE_INTEGER;
+  return count.toString();
+}
+
+type ActionType = typeof actionTypes;
+
+type Action =
+  | {
+      type: ActionType['ADD_TOAST'];
+      toast: ToasterToast;
+    }
+  | {
+      type: ActionType['UPDATE_TOAST'];
+      toast: Partial<ToasterToast>;
+    }
+  | {
+      type: ActionType['DISMISS_TOAST'];
+      toastId?: ToasterToast['id'];
+    }
+  | {
+      type: ActionType['REMOVE_TOAST'];
+      toastId?: ToasterToast['id'];
+    };
+
+interface State {
+  toasts: ToasterToast[];
+}
+
+const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+
+const addToRemoveQueue = (toastId: string) => {
+  if (toastTimeouts.has(toastId)) {
+    return;
+  }
+
+  const timeout = setTimeout(() => {
+    toastTimeouts.delete(toastId);
+    dispatch({
+      type: 'REMOVE_TOAST',
+      toastId: toastId,
+    });
+  }, TOAST_REMOVE_DELAY);
+
+  toastTimeouts.set(toastId, timeout);
+};
+
+export const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'ADD_TOAST':
+      return {
+        ...state,
+        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
+      };
+
+    case 'UPDATE_TOAST':
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        ),
+      };
+
+    case 'DISMISS_TOAST': {
+      const { toastId } = action;
+
+      if (toastId) {
+        addToRemoveQueue(toastId);
+      } else {
+        state.toasts.forEach((toast) => {
+          addToRemoveQueue(toast.id);
+        });
+      }
+
+      return {
+        ...state,
+        toasts: state.toasts.map((t) =>
+          t.id === toastId || toastId === undefined
+            ? {
+                ...t,
+                open: false,
+              }
+            : t
+        ),
+      };
+    }
+    case 'REMOVE_TOAST':
+      if (action.toastId === undefined) {
+        return {
+          ...state,
+          toasts: [],
+        };
+      }
+      return {
+        ...state,
+        toasts: state.toasts.filter((t) => t.id !== action.toastId),
+      };
+  }
+};
+
+const listeners: Array<(state: State) => void> = [];
+
+let memoryState: State = { toasts: [] };
+
+function dispatch(action: Action) {
+  memoryState = reducer(memoryState, action);
+  listeners.forEach((listener) => {
+    listener(memoryState);
+  });
+}
+
+type Toast = Omit<ToasterToast, 'id'>;
+
+function toast({ ...props }: Toast) {
+  const id = genId();
+
+  const update = (props: ToasterToast) =>
+    dispatch({
+      type: 'UPDATE_TOAST',
+      toast: { ...props, id },
+    });
+  const dismiss = () => dispatch({ type: 'DISMISS_TOAST', toastId: id });
+
+  dispatch({
+    type: 'ADD_TOAST',
+    toast: {
+      ...props,
+      id,
+      open: true,
+      onOpenChange: (open) => {
+        if (!open) dismiss();
+      },
+    },
+  });
+
+  return {
+    id: id,
+    dismiss,
+    update,
+  };
+}
+
+function useToast() {
+  const [state, setState] = React.useState<State>(memoryState);
+
+  React.useEffect(() => {
+    listeners.push(setState);
+    return () => {
+      const index = listeners.indexOf(setState);
+      if (index > -1) {
+        listeners.splice(index, 1);
+      }
+    };
+  }, [state]);
+
+  return {
+    ...state,
+    toast,
+    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId }),
+  };
+}
+
+export { useToast, toast };
+```
+
+## hooks\use-debounce.ts
+
+```ts
+import { useState, useEffect } from 'react';
+
+/**
+ * Custom hook that debounces a value
+ * @param value The value to debounce
+ * @param delay Delay in milliseconds
+ * @returns Debounced value
+ */
+export function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    // Set debounced value after delay
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    // Cancel the timeout if value changes (cleanup function)
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]); // Re-run effect when value or delay changes
+
+  return debouncedValue;
+}
+
+/**
+ * Custom hook for debounced callback
+ * @param callback Function to debounce
+ * @param delay Delay in milliseconds
+ * @param deps Dependencies array (similar to useCallback)
+ */
+export function useDebouncedCallback<T extends (...args: any[]) => any>(
+  callback: T,
+  delay: number,
+  deps: any[] = []
+): T {
+  const [debounceTimer, setDebounceTimer] = useState<NodeJS.Timeout | null>(null);
+
+  const debouncedCallback = ((...args: any[]) => {
+    // Clear existing timer
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+
+    // Set new timer
+    const newTimer = setTimeout(() => {
+      callback(...args);
+    }, delay);
+
+    setDebounceTimer(newTimer);
+  }) as T;
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+      }
+    };
+  }, [debounceTimer]);
+
+  return debouncedCallback;
+}
+```
+
+## lib\auth.ts
+
+```ts
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { db } from "./db"; // your Drizzle client
+import { users, accounts, sessions } from "./db/schema";
+import EmailProvider from '@auth/core/providers/email';
+import { Auth } from "@auth/core";
+
+
+
+export type AuthUser = {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  role?: string;
+};
+
+// Define your Session type
+export type Session = {
+  user: AuthUser;
+  expires: string;
+};
+export const authOptions = {
+  adapter: DrizzleAdapter(db), // just pass db, no table options
+  providers: [
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT
+          ? parseInt(process.env.EMAIL_SERVER_PORT)
+          : 587,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+    }),
+  ],
+  callbacks: {
+      session: async ({ session, user }: { session: Session; user: AuthUser }) => {
+      if (session?.user) {
+        session.user.id = user.id;
+        session.user.role = user.role || 'user';
+      }
+      return session;
+    },
+  },
+  pages: {
+    signIn: "/",
+    verifyRequest: "/auth/verify",
+  },
+};
+
+
+export async function getServerSession(): Promise<Session | null> {
+  const req = new Request("http://localhost"); // dummy request for server actions
+  const res = await Auth(req, authOptions);
+
+  // If the response is not OK, return null
+  if (!res.ok) return null;
+
+  // Parse the JSON body
+  const data = await res.json();
+
+  // Access the session object from parsed data
+  const session: Session | undefined = data?.session;
+
+  if (!session || !session.user) return null;
+
+  // Ensure user role exists
+  if (!session.user.role) session.user.role = "user";
+
+  return session;
+}
+// export async function getServerSession(): Promise<Session | null> {
+//   // Use the built-in helper that handles App Router requests
+//   try {
+//     const session = await nextAuthGetServerSession(authOptions);
+//     if (!session?.user) return null;
+
+//     // Ensure user role exists
+//     if (!session.user.role) session.user.role = "user";
+
+//     return session;
+//   } catch (err) {
+//     console.error("Failed to get session:", err);
+//     return null;
+//   }
+// }
+```
+
+## lib\utils.ts
+
+```ts
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+/**
+ * Combines clsx and tailwind-merge for optimal className handling
+ * This is the core utility function used throughout shadcn/ui components
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+/**
+ * Format currency in Indian Rupees
+ */
+export function formatCurrency(amount: number): string {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+/**
+ * Format currency with compact notation for large numbers
+ */
+export function formatCurrencyCompact(amount: number): string {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(amount);
+}
+
+/**
+ * Format date in Indian locale
+ */
+export function formatDate(date: Date | string): string {
+  const d = new Date(date);
+  return d.toLocaleDateString('en-IN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+/**
+ * Format date with time
+ */
+export function formatDateTime(date: Date | string): string {
+  const d = new Date(date);
+  return d.toLocaleDateString('en-IN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+/**
+ * Format relative time (e.g., "2 hours ago")
+ */
+export function formatRelativeTime(date: Date | string): string {
+  const d = new Date(date);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - d.getTime()) / 1000);
+
+  const intervals = {
+    year: 31536000,
+    month: 2592000,
+    week: 604800,
+    day: 86400,
+    hour: 3600,
+    minute: 60,
+  };
+
+  for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+    const interval = Math.floor(diffInSeconds / secondsInUnit);
+    if (interval >= 1) {
+      return `${interval} ${unit}${interval > 1 ? 's' : ''} ago`;
+    }
+  }
+
+  return 'Just now';
+}
+
+/**
+ * Capitalize first letter of a string
+ */
+export function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+/**
+ * Convert camelCase or PascalCase to readable title case
+ */
+export function camelCaseToTitle(str: string): string {
+  return str
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (s) => s.toUpperCase())
+    .trim();
+}
+
+/**
+ * Truncate text with ellipsis
+ */
+export function truncate(str: string, maxLength: number): string {
+  if (str.length <= maxLength) return str;
+  return str.slice(0, maxLength - 3) + '...';
+}
+
+/**
+ * Sleep utility for delays
+ */
+export function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Debounce function to limit function calls
+ */
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
+/**
+ * Throttle function to limit function calls
+ */
+export function throttle<T extends (...args: any[]) => any>(
+  func: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let inThrottle: boolean;
+  return function(this: unknown, ...args: Parameters<T>) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
+/**
+ * Generate initials from a name
+ */
+export function getInitials(name: string): string {
+  return name
+    .split(' ')
+    .map((word) => word.charAt(0))
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+/**
+ * Check if a string is a valid email
+ */
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Check if a string is a valid phone number (Indian format)
+ */
+export function isValidPhoneNumber(phone: string): boolean {
+  const phoneRegex = /^[6-9]\d{9}$/;
+  return phoneRegex.test(phone.replace(/\D/g, ''));
+}
+
+/**
+ * Format phone number with country code
+ */
+export function formatPhoneNumber(phone: string): string {
+  const cleaned = phone.replace(/\D/g, '');
+  if (cleaned.length === 10) {
+    return `+91 ${cleaned.slice(0, 5)} ${cleaned.slice(5)}`;
+  }
+  return phone;
+}
+
+/**
+ * Generate a random ID
+ */
+export function generateId(): string {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+/**
+ * Deep clone an object
+ */
+export function deepClone<T>(obj: T): T {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (obj instanceof Date) return new Date(obj.getTime()) as any;
+  if (obj instanceof Array) return obj.map((item) => deepClone(item)) as any;
+  if (typeof obj === 'object') {
+    const copy: any = {};
+    Object.keys(obj).forEach((key) => {
+      copy[key] = deepClone((obj as any)[key]);
+    });
+    return copy;
+  }
+  return obj;
+}
+
+/**
+ * Check if an object is empty
+ */
+export function isEmpty(obj: any): boolean {
+  if (obj == null) return true;
+  if (Array.isArray(obj) || typeof obj === 'string') return obj.length === 0;
+  if (obj instanceof Map || obj instanceof Set) return obj.size === 0;
+  return Object.keys(obj).length === 0;
+}
+
+/**
+ * Get contrast color (black or white) for a given background color
+ */
+export function getContrastColor(hexColor: string): string {
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.5 ? '#000000' : '#ffffff';
+}
+
+/**
+ * Convert file size to human readable format
+ */
+export function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+/**
+ * Calculate percentage
+ */
+export function calculatePercentage(value: number, total: number): number {
+  if (total === 0) return 0;
+  return Math.round((value / total) * 100);
+}
+
+/**
+ * Format percentage
+ */
+export function formatPercentage(value: number, total: number): string {
+  const percentage = calculatePercentage(value, total);
+  return `${percentage}%`;
+}
+
+/**
+ * Clamp a number between min and max values
+ */
+export function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
+}
+
+/**
+ * Convert string to slug (URL-friendly)
+ */
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w ]+/g, '')
+    .replace(/ +/g, '-');
+}
+
+/**
+ * Remove duplicates from an array
+ */
+export function removeDuplicates<T>(array: T[]): T[] {
+  return [...new Set(array)];
+}
+
+/**
+ * Group array of objects by a key
+ */
+export function groupBy<T>(array: T[], key: keyof T): Record<string, T[]> {
+  return array.reduce((groups, item) => {
+    const group = String(item[key]);
+    groups[group] = groups[group] || [];
+    groups[group].push(item);
+    return groups;
+  }, {} as Record<string, T[]>);
+}
+
+/**
+ * Sort array of objects by a key
+ */
+export function sortBy<T>(array: T[], key: keyof T, direction: 'asc' | 'desc' = 'asc'): T[] {
+  return [...array].sort((a, b) => {
+    const aVal = a[key];
+    const bVal = b[key];
+    
+    if (direction === 'asc') {
+      return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+    } else {
+      return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
+    }
+  });
+}
+
+/**
+ * Check if current environment is development
+ */
+export function isDevelopment(): boolean {
+  return process.env.NODE_ENV === 'development';
+}
+
+/**
+ * Check if current environment is production
+ */
+export function isProduction(): boolean {
+  return process.env.NODE_ENV === 'production';
+}
+
+/**
+ * Safe JSON parse with fallback
+ */
+export function safeJsonParse<T>(json: string, fallback: T): T {
+  try {
+    return JSON.parse(json);
+  } catch {
+    return fallback;
+  }
+}
+
+/**
+ * Copy text to clipboard
+ */
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      return true;
+    } catch {
+      return false;
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  }
+}
+
+/**
+ * Download data as file
+ */
+export function downloadAsFile(data: string, filename: string, type: string = 'text/plain'): void {
+  const blob = new Blob([data], { type });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
+}
+
+/**
+ * Get status color for buyer status
+ */
+export function getStatusColor(status: string): string {
+  const colors = {
+    New: 'bg-blue-100 text-blue-800 border-blue-200',
+    Qualified: 'bg-green-100 text-green-800 border-green-200',
+    Contacted: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    Visited: 'bg-purple-100 text-purple-800 border-purple-200',
+    Negotiation: 'bg-orange-100 text-orange-800 border-orange-200',
+    Converted: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    Dropped: 'bg-red-100 text-red-800 border-red-200',
+  };
+  return colors[status as keyof typeof colors] || colors.New;
+}
+
+/**
+ * Get priority color for timeline
+ */
+export function getTimelineColor(timeline: string): string {
+  const colors = {
+    '0-3m': 'bg-red-100 text-red-800 border-red-200',
+    '3-6m': 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    '>6m': 'bg-blue-100 text-blue-800 border-blue-200',
+    'Exploring': 'bg-gray-100 text-gray-800 border-gray-200',
+  };
+  return colors[timeline as keyof typeof colors] || colors.Exploring;
+}
+```
+
+## lib\db\index.ts
+
+```ts
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import * as schema from './schema';
+
+const connectionString = process.env.DATABASE_URL!;
+const client = postgres(connectionString);
+
+export const db = drizzle(client, { schema });
+```
+
+## lib\db\migrate.ts
+
+```ts
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { migrate } from 'drizzle-orm/postgres-js/migrator';
+import postgres from 'postgres';
+
+const connectionString = process.env.DATABASE_URL!;
+const client = postgres(connectionString, { max: 1 });
+const db = drizzle(client);
+
+async function main() {
+  console.log('Running migrations...');
+  await migrate(db, { migrationsFolder: './lib/db/migrations' });
+  console.log('Migrations completed!');
+  process.exit(0);
+}
+
+main().catch((err) => {
+  console.error('Migration failed:', err);
+  process.exit(1);
+});
+```
+
+## lib\db\queries.ts
+
+```ts
+import { db } from './index';
+import { buyers, buyerHistory, users } from './schema';
+import { eq, and, or, ilike, desc, asc, count } from 'drizzle-orm';
+import type { BuyerFilters } from '@/lib/validations/buyer';
+
+export async function getBuyers(filters: BuyerFilters, userId?: string) {
+  const { search, city, propertyType, status, timeline, page, limit, sortBy, sortOrder } = filters;
+
+  let query = db.select({
+    id: buyers.id,
+    fullName: buyers.fullName,
+    email: buyers.email,
+    phone: buyers.phone,
+    city: buyers.city,
+    propertyType: buyers.propertyType,
+    bhk: buyers.bhk,
+    purpose: buyers.purpose,
+    budgetMin: buyers.budgetMin,
+    budgetMax: buyers.budgetMax,
+    timeline: buyers.timeline,
+    source: buyers.source,
+    status: buyers.status,
+    notes: buyers.notes,
+    tags: buyers.tags,
+    ownerId: buyers.ownerId,
+    createdAt: buyers.createdAt,
+    updatedAt: buyers.updatedAt,
+    owner: {
+      id: users.id,
+      name: users.name,
+      email: users.email,
+    },
+  }).from(buyers).leftJoin(users, eq(buyers.ownerId, users.id)) as any;
+
+  // Apply filters
+  const conditions = [];
+
+  if (search) {
+    conditions.push(
+      or(
+        ilike(buyers.fullName, `%${search}%`),
+        ilike(buyers.phone, `%${search}%`),
+        ilike(buyers.email, `%${search}%`),
+        ilike(buyers.notes, `%${search}%`)
+      )
+    );
+  }
+
+  if (city) conditions.push(eq(buyers.city, city));
+  if (propertyType) conditions.push(eq(buyers.propertyType, propertyType));
+  if (status) conditions.push(eq(buyers.status, status));
+  if (timeline) conditions.push(eq(buyers.timeline, timeline));
+
+  if (conditions.length > 0) {
+    query = query.where(and(...conditions));
+  }
+
+  // Apply sorting
+  const sortColumn = sortBy ? (buyers as any)[sortBy] : undefined;
+  if (sortColumn) {
+    query = query.orderBy(sortOrder === 'asc' ? asc(sortColumn) : desc(sortColumn));
+  }
+
+  // Apply pagination
+  const offset = (page - 1) * limit;
+  const results = await query.limit(limit).offset(offset);
+
+  // Get total count
+  let countQuery:any = db.select({ count: count() }).from(buyers);
+  if (conditions.length > 0) {
+    countQuery = countQuery.where(and(...conditions));
+  }
+  const totalResult = await countQuery;
+  const total = totalResult[0]?.count || 0;
+
+  return {
+    data: results,
+    total,
+    page,
+    limit,
+    totalPages: Math.ceil(total / limit),
+  };
+}
+
+export async function getBuyer(id: string) {
+  const result = await db.select({
+    id: buyers.id,
+    fullName: buyers.fullName,
+    email: buyers.email,
+    phone: buyers.phone,
+    city: buyers.city,
+    propertyType: buyers.propertyType,
+    bhk: buyers.bhk,
+    purpose: buyers.purpose,
+    budgetMin: buyers.budgetMin,
+    budgetMax: buyers.budgetMax,
+    timeline: buyers.timeline,
+    source: buyers.source,
+    status: buyers.status,
+    notes: buyers.notes,
+    tags: buyers.tags,
+    ownerId: buyers.ownerId,
+    createdAt: buyers.createdAt,
+    updatedAt: buyers.updatedAt,
+    owner: {
+      id: users.id,
+      name: users.name,
+      email: users.email,
+    },
+  })
+  .from(buyers)
+  .leftJoin(users, eq(buyers.ownerId, users.id))
+  .where(eq(buyers.id, id))
+  .limit(1);
+
+  return result[0] || null;
+}
+
+export async function createBuyer(data: any, ownerId: string) {
+  const [buyer] = await db.insert(buyers).values({
+    ...data,
+    ownerId,
+    updatedAt: new Date(),
+  }).returning();
+
+  // Create history entry
+  await db.insert(buyerHistory).values({
+    buyerId: buyer.id,
+    changedBy: ownerId,
+    changedAt: new Date(),
+    diff: { created: { old: null, new: data } },
+  });
+
+  return buyer;
+}
+
+export async function updateBuyer(id: string, data: any, userId: string, oldData: any) {
+  const [buyer] = await db.update(buyers)
+    .set({
+      ...data,
+      updatedAt: new Date(),
+    })
+    .where(eq(buyers.id, id))
+    .returning();
+
+  // Calculate diff
+  const diff: Record<string, { old: any; new: any }> = {};
+  for (const key in data) {
+    if (data[key] !== oldData[key]) {
+      diff[key] = { old: oldData[key], new: data[key] };
+    }
+  }
+
+  if (Object.keys(diff).length > 0) {
+    await db.insert(buyerHistory).values({
+      buyerId: id,
+      changedBy: userId,
+      changedAt: new Date(),
+      diff,
+    });
+  }
+
+  return buyer;
+}
+
+export async function deleteBuyer(id: string) {
+  await db.delete(buyers).where(eq(buyers.id, id));
+}
+
+export async function getBuyerHistory(buyerId: string) {
+  const result = await db.select({
+    id: buyerHistory.id,
+    changedAt: buyerHistory.changedAt,
+    diff: buyerHistory.diff,
+    changedBy: {
+      id: users.id,
+      name: users.name,
+      email: users.email,
+    },
+  })
+  .from(buyerHistory)
+  .leftJoin(users, eq(buyerHistory.changedBy, users.id))
+  .where(eq(buyerHistory.buyerId, buyerId))
+  .orderBy(desc(buyerHistory.changedAt))
+  .limit(5);
+
+  return result;
+}
+
+export async function getBuyersStats(userId?: string) {
+  const conditions = userId ? [eq(buyers.ownerId, userId)] : [];
+  
+  const statsQuery = db.select({
+    status: buyers.status,
+    count: count(),
+  })
+  .from(buyers)
+  .groupBy(buyers.status);
+
+  if (conditions.length > 0) {
+    statsQuery.where(and(...conditions));
+  }
+
+  const stats = await statsQuery;
+  const total = stats.reduce((sum, stat) => sum + stat.count, 0);
+
+  return { stats, total };
+}
+```
+
+## lib\db\schema.ts
+
+```ts
+import { pgTable, uuid, varchar, text, integer, timestamp, json, pgEnum, primaryKey } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+
+// Enums
+export const cityEnum = pgEnum('city', ['Chandigarh', 'Mohali', 'Zirakpur', 'Panchkula', 'Other']);
+export const propertyTypeEnum = pgEnum('property_type', ['Apartment', 'Villa', 'Plot', 'Office', 'Retail']);
+export const bhkEnum = pgEnum('bhk', ['1', '2', '3', '4', 'Studio']);
+export const purposeEnum = pgEnum('purpose', ['Buy', 'Rent']);
+export const timelineEnum = pgEnum('timeline', ['0-3m', '3-6m', '>6m', 'Exploring']);
+export const sourceEnum = pgEnum('source', ['Website', 'Referral', 'Walk-in', 'Call', 'Other']);
+export const statusEnum = pgEnum('status', ['New', 'Qualified', 'Contacted', 'Visited', 'Negotiation', 'Converted', 'Dropped']);
+
+// Users table (for authentication)
+export const users = pgTable('users', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  name: varchar('name', { length: 255 }),
+  image: varchar('image', { length: 500 }),
+  role: varchar('role', { length: 50 }).default('user'), // user | admin
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Buyers table (leads)
+export const buyers = pgTable('buyers', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  fullName: varchar('full_name', { length: 80 }).notNull(),
+  email: varchar('email', { length: 255 }),
+  phone: varchar('phone', { length: 15 }).notNull(),
+  city: cityEnum('city').notNull(),
+  propertyType: propertyTypeEnum('property_type').notNull(),
+  bhk: bhkEnum('bhk'),
+  purpose: purposeEnum('purpose').notNull(),
+  budgetMin: integer('budget_min'),
+  budgetMax: integer('budget_max'),
+  timeline: timelineEnum('timeline').notNull(),
+  source: sourceEnum('source').notNull(),
+  status: statusEnum('status').notNull().default('New'),
+  notes: text('notes'),
+  tags: json('tags').$type<string[]>(),
+  ownerId: uuid('owner_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+});
+
+// Buyer history table
+export const buyerHistory = pgTable('buyer_history', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  buyerId: uuid('buyer_id').notNull().references(() => buyers.id, { onDelete: 'cascade' }),
+  changedBy: uuid('changed_by').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  changedAt: timestamp('changed_at').defaultNow().notNull(),
+  diff: json('diff').$type<Record<string, { old: any; new: any }>>().notNull(),
+});
+
+// Sessions table (for NextAuth)
+export const sessions = pgTable('sessions', {
+  sessionToken: varchar('sessionToken', { length: 255 }).primaryKey(),
+  userId: uuid('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  expires: timestamp('expires').notNull(),
+});
+
+// Accounts table (for NextAuth)
+export const accounts = pgTable('accounts', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: uuid('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: varchar('type', { length: 255 }).notNull(),
+  provider: varchar('provider', { length: 255 }).notNull(),
+  providerAccountId: varchar('providerAccountId', { length: 255 }).notNull(),
+  refresh_token: text('refresh_token'),
+  access_token: text('access_token'),
+  expires_at: integer('expires_at'),
+  token_type: varchar('token_type', { length: 255 }),
+  scope: varchar('scope', { length: 255 }),
+  id_token: text('id_token'),
+  session_state: varchar('session_state', { length: 255 }),
+});
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  buyers: many(buyers),
+  historyChanges: many(buyerHistory),
+  sessions: many(sessions),
+  accounts: many(accounts),
+}));
+
+export const buyersRelations = relations(buyers, ({ one, many }) => ({
+  owner: one(users, {
+    fields: [buyers.ownerId],
+    references: [users.id],
+  }),
+  history: many(buyerHistory),
+}));
+
+export const buyerHistoryRelations = relations(buyerHistory, ({ one }) => ({
+  buyer: one(buyers, {
+    fields: [buyerHistory.buyerId],
+    references: [buyers.id],
+  }),
+  changedByUser: one(users, {
+    fields: [buyerHistory.changedBy],
+    references: [users.id],
+  }),
+}));
+
+export const verificationTokens = pgTable(
+  'verificationTokens',
+  {
+    identifier: varchar('identifier', { length: 255 }).notNull(),
+    token: varchar('token', { length: 255 }).notNull(),
+    expires: timestamp('expires').notNull(),
+  },
+  (vt) => ({
+    compositePk: primaryKey({ columns: [vt.identifier, vt.token] }),
+  })
+);
+
+
+// Type exports
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
+export type Buyer = typeof buyers.$inferSelect;
+export type NewBuyer = typeof buyers.$inferInsert;
+export type BuyerHistory = typeof buyerHistory.$inferSelect;
+export type NewBuyerHistory = typeof buyerHistory.$inferInsert;
+
+```
+
+## lib\db\seed.ts
+
+```ts
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import { users, buyers } from './schema';
+import * as schema from './schema';
+
+const connectionString = process.env.DATABASE_URL!;
+const client = postgres(connectionString);
+const db = drizzle(client, { schema });
+
+async function seed() {
+  console.log('Seeding database...');
+
+  // Create a test user
+  const [testUser] = await db.insert(users).values({
+    email: 'admin@example.com',
+    name: 'Admin User',
+    role: 'admin',
+  }).returning();
+
+  // Create sample buyers
+  const sampleBuyers = [
+    {
+      fullName: 'Rajesh Kumar',
+      email: 'rajesh@example.com',
+      phone: '9876543210',
+      city: 'Chandigarh' as const,
+      propertyType: 'Apartment' as const,
+      bhk: '3' as const,
+      purpose: 'Buy' as const,
+      budgetMin: 5000000,
+      budgetMax: 7000000,
+      timeline: '0-3m' as const,
+      source: 'Website' as const,
+      status: 'New' as const,
+      notes: 'Looking for a 3BHK apartment in sector 22',
+      tags: ['urgent', 'high-budget'],
+      ownerId: testUser.id,
+    },
+    {
+      fullName: 'Priya Sharma',
+      phone: '9876543211',
+      city: 'Mohali' as const,
+      propertyType: 'Villa' as const,
+      bhk: '4' as const,
+      purpose: 'Buy' as const,
+      budgetMin: 8000000,
+      budgetMax: 12000000,
+      timeline: '3-6m' as const,
+      source: 'Referral' as const,
+      status: 'Qualified' as const,
+      notes: 'Referred by existing client. Wants independent villa.',
+      tags: ['referral', 'qualified'],
+      ownerId: testUser.id,
+    },
+    {
+      fullName: 'Amit Singh',
+      email: 'amit@example.com',
+      phone: '9876543212',
+      city: 'Zirakpur' as const,
+      propertyType: 'Plot' as const,
+      purpose: 'Buy' as const,
+      budgetMin: 2000000,
+      budgetMax: 3000000,
+      timeline: '>6m' as const,
+      source: 'Walk-in' as const,
+      status: 'Contacted' as const,
+      notes: 'Interested in residential plot for future construction',
+      tags: ['plot', 'future-construction'],
+      ownerId: testUser.id,
+    },
+    {
+      fullName: 'Neha Gupta',
+      email: 'neha@example.com',
+      phone: '9876543213',
+      city: 'Panchkula' as const,
+      propertyType: 'Office' as const,
+      purpose: 'Rent' as const,
+      budgetMin: 50000,
+      budgetMax: 80000,
+      timeline: '0-3m' as const,
+      source: 'Call' as const,
+      status: 'Visited' as const,
+      notes: 'Needs office space for IT startup',
+      tags: ['commercial', 'startup'],
+      ownerId: testUser.id,
+    },
+  ];
+
+  await db.insert(buyers).values(sampleBuyers);
+
+  console.log('Seeding completed!');
+  process.exit(0);
+}
+
+seed().catch((err) => {
+  console.error('Seeding failed:', err);
+  process.exit(1);
+});
+```
+
+## lib\validations\buyer.ts
+
+```ts
+import { z } from 'zod';
+
+// ---------------- Enums ----------------
+export const citySchema = z.enum(['Chandigarh', 'Mohali', 'Zirakpur', 'Panchkula', 'Other']);
+export const propertyTypeSchema = z.enum(['Apartment', 'Villa', 'Plot', 'Office', 'Retail']);
+export const bhkSchema = z.enum(['1', '2', '3', '4', 'Studio']);
+export const purposeSchema = z.enum(['Buy', 'Rent']);
+export const timelineSchema = z.enum(['0-3m', '3-6m', '>6m', 'Exploring']);
+export const sourceSchema = z.enum(['Website', 'Referral', 'Walk-in', 'Call', 'Other']);
+export const statusSchema = z.enum(['New', 'Qualified', 'Contacted', 'Visited', 'Negotiation', 'Converted', 'Dropped']);
+
+// ---------------- Regex ----------------
+const phoneRegex = /^\d{10,15}$/;
+
+// ---------------- Base Schema (before refinements) ----------------
+const baseBuyerSchema = z.object({
+  fullName: z.string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(80, 'Name must be at most 80 characters')
+    .trim(),
+
+  email: z.preprocess(
+    (val) => (val === '' ? undefined : val),
+    z.string().email('Invalid email format').optional()
+  ),
+
+  phone: z.string()
+    .regex(phoneRegex, 'Phone must be 10-15 digits')
+    .transform((val) => val.replace(/\D/g, '')),
+
+  city: citySchema,
+  propertyType: propertyTypeSchema,
+  bhk: bhkSchema.optional(),
+  purpose: purposeSchema,
+
+  budgetMin: z.preprocess(
+    (val) => (val === '' ? undefined : Number(val)),
+    z.number().int().positive('Budget must be positive').optional()
+  ),
+
+  budgetMax: z.preprocess(
+    (val) => (val === '' ? undefined : Number(val)),
+    z.number().int().positive('Budget must be positive').optional()
+  ),
+
+  timeline: timelineSchema,
+  source: sourceSchema,
+  status: statusSchema.default('New'),
+
+  notes: z.preprocess(
+    (val) => (val === '' ? undefined : val),
+    z.string().max(1000, 'Notes must be at most 1000 characters').optional()
+  ),
+
+  tags: z.preprocess(
+    (val) =>
+      Array.isArray(val)
+        ? val.filter((tag) => typeof tag === 'string' && tag.trim() !== '')
+        : [],
+    z.array(z.string()).optional().default([])
+  ),
+});
+
+// ---------------- Buyer Schema (with refinements) ----------------
+export const buyerSchema = baseBuyerSchema
+  .refine(
+    (data) =>
+      !(['Apartment', 'Villa'].includes(data.propertyType) && !data.bhk),
+    {
+      message: 'BHK is required for Apartment and Villa properties',
+      path: ['bhk'],
+    }
+  )
+  .refine(
+    (data) =>
+      !(data.budgetMin && data.budgetMax && data.budgetMin > data.budgetMax),
+    {
+      message: 'Maximum budget must be greater than or equal to minimum budget',
+      path: ['budgetMax'],
+    }
+  );
+
+// ---------------- Create & Update Schemas ----------------
+export const createBuyerSchema = buyerSchema;
+
+export const updateBuyerSchema = baseBuyerSchema.partial().extend({
+  id: z.string().uuid(),
+  updatedAt: z.string().datetime().optional(),
+});
+
+// ---------------- Filters ----------------
+export const buyerFiltersSchema = z.object({
+  search: z.string().optional(),
+  city: citySchema.optional(),
+  propertyType: propertyTypeSchema.optional(),
+  status: statusSchema.optional(),
+  timeline: timelineSchema.optional(),
+  page: z.number().int().positive().default(1),
+  limit: z.number().int().positive().max(100).default(10),
+  sortBy: z.enum(['fullName', 'phone', 'city', 'propertyType', 'status', 'updatedAt']).default('updatedAt'),
+  sortOrder: z.enum(['asc', 'desc']).default('desc'),
+});
+
+// ---------------- CSV Import Schema ----------------
+export const csvBuyerSchema = z.object({
+  fullName: z.string().min(2).max(80),
+  email: z.preprocess(
+    (val) => (val === '' ? undefined : val),
+    z.string().email().optional()
+  ),
+  phone: z.string().regex(phoneRegex),
+  city: citySchema,
+  propertyType: propertyTypeSchema,
+  bhk: bhkSchema.optional().or(z.literal('')),
+  purpose: purposeSchema,
+  budgetMin: z.preprocess(
+    (val) => (val === '' ? undefined : Number(val)),
+    z.number().int().positive().optional()
+  ),
+  budgetMax: z.preprocess(
+    (val) => (val === '' ? undefined : Number(val)),
+    z.number().int().positive().optional()
+  ),
+  timeline: timelineSchema,
+  source: sourceSchema,
+  notes: z.preprocess(
+    (val) => (val === '' ? undefined : val),
+    z.string().max(1000).optional()
+  ),
+  tags: z.preprocess(
+    (val) =>
+      typeof val === 'string'
+        ? val.split(',').map((tag) => tag.trim()).filter(Boolean)
+        : [],
+    z.array(z.string()).optional().default([])
+  ),
+  status: statusSchema.default('New'),
+})
+  .refine(
+    (data) =>
+      !(['Apartment', 'Villa'].includes(data.propertyType) && !data.bhk),
+    {
+      message: 'BHK is required for Apartment and Villa properties',
+      path: ['bhk'],
+    }
+  )
+  .refine(
+    (data) =>
+      !(data.budgetMin && data.budgetMax && data.budgetMin > data.budgetMax),
+    {
+      message: 'Maximum budget must be greater than or equal to minimum budget',
+      path: ['budgetMax'],
+    }
+  );
+
+// ---------------- CSV Import Result ----------------
+export const csvImportResultSchema = z.object({
+  valid: z.array(z.any()),
+  invalid: z.array(z.object({
+    row: z.number(),
+    data: z.any(),
+    errors: z.array(z.string()),
+  })),
+});
+
+// ---------------- Types ----------------
+export type BuyerFormData = z.infer<typeof buyerSchema>;
+export type CreateBuyerData = z.infer<typeof createBuyerSchema>;
+export type UpdateBuyerData = z.infer<typeof updateBuyerSchema>;
+export type BuyerFilters = z.infer<typeof buyerFiltersSchema>;
+export type CSVBuyerData = z.infer<typeof csvBuyerSchema>;
+export type CSVImportResult = z.infer<typeof csvImportResultSchema>;
+
+// ---------------- Utilities ----------------
+export function validateBuyer(data: unknown) {
+  return buyerSchema.safeParse(data);
+}
+
+export function validateBuyerFilters(data: unknown) {
+  return buyerFiltersSchema.safeParse(data);
+}
+
+export function validateCSVBuyer(data: unknown) {
+  return csvBuyerSchema.safeParse(data);
+}
+
+```
+
+
+
+
+
+
+
+
+
+
+## drizzle.config.ts
+
+```ts
+import type { Config } from 'drizzle-kit';
+
+export default {
+  schema: './lib/db/schema.ts',
+  out: './lib/db/migrations',
+  driver: 'pg',
+  dbCredentials: {
+    connectionString: process.env.DATABASE_URL!,
+  },
+} satisfies Config;
+```
+
+## eslint.config.mjs
+
+```mjs
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+    ],
+  },
+];
+
+export default eslintConfig;
+
+```
+
+## jest.config.js
+
+```js
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({
+  dir: './',
+});
+
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  moduleNameMapping: {
+    '^@/(.*)
+```: '<rootDir>/$1',
+  },
+  testEnvironment: 'jest-environment-jsdom',
+  collectCoverageFrom: [
+    'lib/**/*.{js,jsx,ts,tsx}',
+    'components/**/*.{js,jsx,ts,tsx}',
+    'app/**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+  ],
+};
+
+module.exports = createJestConfig(customJestConfig);
+```
+
+## jest.setup.js
+
+```js
+import '@testing-library/jest-dom';
+
+
+```
+
+## next-auth.d.ts
+
+```ts
+// types/next-auth.d.ts
+import 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;
+      role: 'user' | 'admin';
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+
+  interface User {
+    id: string;
+    role: 'user' | 'admin';
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  }
+}
+
+```
+
+## next.config.js
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  experimental: {
+    turbo: true, // Enables Turbopack for faster builds
+    serverActions: true, // Optional: if using server actions
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // Optional: ignore lint errors in build
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // allow images from any host (adjust for production)
+      },
+    ],
+  },
+}
+
+module.exports = nextConfig
+
+```
+
+## package.json
+
+```json
+{
+  "name": "assignmentintershalla",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev ",
+    "build": "next build ",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:migrate": "tsx lib/db/migrate.ts",
+    "db:seed": "tsx lib/db/seed.ts",
+    "db:reset": "tsx lib/db/reset.ts",
+    "db:studio": "drizzle-kit studio",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@auth/core": "^0.34.2",
+    "@auth/drizzle-adapter": "^0.7.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-alert-dialog": "^1.0.5",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-separator": "^1.0.3",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-toast": "^1.1.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "drizzle-orm": "^0.29.5",
+    "lucide-react": "^0.544.0",
+    "next": "^14.2.13",
+    "next-auth": "^5.0.0-beta.29",
+    "nodemailer": "^6.9.9",
+    "papaparse": "^5.4.1",
+    "postgres": "^3.4.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.49.3",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20",
+    "@types/nodemailer": "^6.4.14",
+    "@types/papaparse": "^5.3.14",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/uuid": "^9.0.8",
+    "autoprefixer": "^10.4.17",
+    "drizzle-kit": "^0.20.14",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "postcss": "^8.4.35",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^4",
+    "tsx": "^4.7.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
+```
+
+## postcss.config.mjs
+
+```mjs
+const config = {
+  plugins: ["@tailwindcss/postcss"],
+};
+
+export default config;
+
+```
+
+## tailwind.config.ts
+
+```ts
+import type { Config } from 'tailwindcss';
+import animatePlugin from 'tailwindcss-animate';
+
+const config: Config = {
+  darkMode: ['class', '.dark'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+    './src/styles/globals.css', // include your global CSS
+  ],
+  theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
+    extend: {
+      colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'animate-in': {
+          from: { opacity: 0, transform: 'translateY(-10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        'animate-out': {
+          from: { opacity: 1, transform: 'translateY(0)' },
+          to: { opacity: 0, transform: 'translateY(-10px)' },
+        },
+        'accordion-down': {
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
+        },
+      },
+      animation: {
+        'animate-in': 'animate-in 0.2s ease-out',
+        'animate-out': 'animate-out 0.2s ease-in',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+    },
+  },
+  plugins: [animatePlugin],
+};
+
+export default config;
+
+```
+
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts","next-auth.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.js"],
+  "exclude": ["node_modules"]
+}
+
+```
