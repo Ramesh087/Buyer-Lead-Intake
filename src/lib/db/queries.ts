@@ -1,5 +1,5 @@
 import { db } from './index';
-import { buyers, buyerHistory, users } from './schema';
+import { buyers, buyerHistory, authUsers } from './schema';
 import { eq, and, or, ilike, desc, asc, count } from 'drizzle-orm';
 import type { BuyerFilters } from '@/lib/validations/buyer';
 
@@ -30,7 +30,7 @@ export async function getBuyers(filters: BuyerFilters, userId?: string) {
       name: users.name,
       email: users.email,
     },
-  }).from(buyers).leftJoin(users, eq(buyers.ownerId, users.id)) as any;
+  }).from(buyers).leftJoin(authUsers, eq(buyers.ownerId, authUsers.id)) as any;
 
   // Apply filters
   const conditions = [];
@@ -103,13 +103,13 @@ export async function getBuyer(id: string) {
     createdAt: buyers.createdAt,
     updatedAt: buyers.updatedAt,
     owner: {
-      id: users.id,
-      name: users.name,
-      email: users.email,
+      id: authUsers.id,
+      name: authUsers.name,
+      email: authUsers.email,
     },
   })
   .from(buyers)
-  .leftJoin(users, eq(buyers.ownerId, users.id))
+  .leftJoin(authUsers, eq(buyers.ownerId, authUsers.id))
   .where(eq(buyers.id, id))
   .limit(1);
 
@@ -173,13 +173,13 @@ export async function getBuyerHistory(buyerId: string) {
     changedAt: buyerHistory.changedAt,
     diff: buyerHistory.diff,
     changedBy: {
-      id: users.id,
-      name: users.name,
-      email: users.email,
+      id: authUsers.id,
+      name: authUsers.name,
+      email: authUsers.email,
     },
   })
   .from(buyerHistory)
-  .leftJoin(users, eq(buyerHistory.changedBy, users.id))
+  .leftJoin(authUsers, eq(buyerHistory.changedBy, authUsers.id))
   .where(eq(buyerHistory.buyerId, buyerId))
   .orderBy(desc(buyerHistory.changedAt))
   .limit(5);

@@ -34,12 +34,12 @@ const baseBuyerSchema = z.object({
   purpose: purposeSchema,
 
   budgetMin: z.preprocess(
-    (val) => (val === '' ? undefined : Number(val)),
+    (val) => (val === '' || val === null || typeof val === 'undefined' ? undefined : Number(val)),
     z.number().int().positive('Budget must be positive').optional()
   ),
 
   budgetMax: z.preprocess(
-    (val) => (val === '' ? undefined : Number(val)),
+    (val) => (val === '' || val === null || typeof val === 'undefined' ? undefined : Number(val)),
     z.number().int().positive('Budget must be positive').optional()
   ),
 

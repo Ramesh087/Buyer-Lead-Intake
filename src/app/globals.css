@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ------------------------------
    Base styles
@@ -55,7 +53,8 @@
 
   /* Global body styles */
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: system-ui, sans-serif;
     min-height: 100vh;
     line-height: 1.5;
@@ -84,7 +83,8 @@
 
   /* Focus-visible accessibility */
   .focus-visible {
-    @apply ring-2 ring-ring ring-offset-2 ring-offset-background outline-none;
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 }
 
@@ -99,12 +99,13 @@
 
   /* Spinner */
   .spinner {
-    @apply animate-spin rounded-full border-2 border-gray-300 border-t-primary;
+    @apply animate-spin rounded-full border-2 border-gray-300;
+    border-top-color: hsl(var(--primary));
   }
 
   /* Form groups */
   .form-group { @apply space-y-2; }
-  .form-error { @apply text-destructive text-sm; }
+  .form-error { color: hsl(var(--destructive)); font-size: 0.875rem; line-height: 1.25rem; }
 
   /* Status badges */
   .status-new        { @apply bg-blue-100 text-blue-800 border border-blue-200; }

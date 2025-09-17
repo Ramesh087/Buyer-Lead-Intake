@@ -86,14 +86,14 @@ export function BuyersFilters() {
         </div>
 
         <Select
-          value={searchParams.get('city') || ''}
-          onValueChange={(value) => updateFilters('city', value)}
+          value={searchParams.get('city') ?? undefined}
+          onValueChange={(value) => updateFilters('city', value === 'all' ? '' : value)}
         >
           <SelectTrigger>
             <SelectValue placeholder="All Cities" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Cities</SelectItem>
+            <SelectItem value="all">All Cities</SelectItem>
             <SelectItem value="Chandigarh">Chandigarh</SelectItem>
             <SelectItem value="Mohali">Mohali</SelectItem>
             <SelectItem value="Zirakpur">Zirakpur</SelectItem>
@@ -103,14 +103,14 @@ export function BuyersFilters() {
         </Select>
 
         <Select
-          value={searchParams.get('propertyType') || ''}
-          onValueChange={(value) => updateFilters('propertyType', value)}
+          value={searchParams.get('propertyType') ?? undefined}
+          onValueChange={(value) => updateFilters('propertyType', value === 'all' ? '' : value)}
         >
           <SelectTrigger>
             <SelectValue placeholder="All Properties" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Properties</SelectItem>
+            <SelectItem value="all">All Properties</SelectItem>
             <SelectItem value="Apartment">Apartment</SelectItem>
             <SelectItem value="Villa">Villa</SelectItem>
             <SelectItem value="Plot">Plot</SelectItem>
@@ -120,14 +120,14 @@ export function BuyersFilters() {
         </Select>
 
         <Select
-          value={searchParams.get('status') || ''}
-          onValueChange={(value) => updateFilters('status', value)}
+          value={searchParams.get('status') ?? undefined}
+          onValueChange={(value) => updateFilters('status', value === 'all' ? '' : value)}
         >
           <SelectTrigger>
             <SelectValue placeholder="All Status" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Status</SelectItem>
+            <SelectItem value="all">All Status</SelectItem>
             <SelectItem value="New">New</SelectItem>
             <SelectItem value="Qualified">Qualified</SelectItem>
             <SelectItem value="Contacted">Contacted</SelectItem>
@@ -139,14 +139,14 @@ export function BuyersFilters() {
         </Select>
 
         <Select
-          value={searchParams.get('timeline') || ''}
-          onValueChange={(value) => updateFilters('timeline', value)}
+          value={searchParams.get('timeline') ?? undefined}
+          onValueChange={(value) => updateFilters('timeline', value === 'all' ? '' : value)}
         >
           <SelectTrigger>
             <SelectValue placeholder="All Timeline" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Timeline</SelectItem>
+            <SelectItem value="all">All Timeline</SelectItem>
             <SelectItem value="0-3m">0-3 months</SelectItem>
             <SelectItem value="3-6m">3-6 months</SelectItem>
             <SelectItem value=">6m">6+ months</SelectItem>

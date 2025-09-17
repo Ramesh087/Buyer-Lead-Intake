@@ -38,7 +38,7 @@ export const buyers = pgTable('buyers', {
   status: statusEnum('status').notNull().default('New'),
   notes: text('notes'),
   tags: json('tags').$type<string[]>(),
-  ownerId: uuid('owner_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  ownerId: text('owner_id').notNull().references(() => authUsers.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
@@ -84,9 +84,9 @@ export const usersRelations = relations(users, ({ many }) => ({
 }));
 
 export const buyersRelations = relations(buyers, ({ one, many }) => ({
-  owner: one(users, {
+  owner: one(authUsers, {
     fields: [buyers.ownerId],
-    references: [users.id],
+    references: [authUsers.id],
   }),
   history: many(buyerHistory),
 }));
@@ -113,6 +113,46 @@ export const verificationTokens = pgTable(
     compositePk: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
+
+// --- Adapter default auth tables (for @auth/drizzle-adapter) ---
+// These mirror the adapter's expected schema: user/account/session/verificationToken with text ids
+export const authUsers = pgTable('user', {
+  id: text('id').notNull().primaryKey(),
+  name: text('name'),
+  email: text('email').notNull(),
+  emailVerified: timestamp('emailVerified', { mode: 'date' }),
+  image: text('image'),
+});
+
+export const authAccounts = pgTable('account', {
+  userId: text('userId').notNull().references(() => authUsers.id, { onDelete: 'cascade' }),
+  type: text('type').notNull(),
+  provider: text('provider').notNull(),
+  providerAccountId: text('providerAccountId').notNull(),
+  refresh_token: text('refresh_token'),
+  access_token: text('access_token'),
+  expires_at: integer('expires_at'),
+  token_type: text('token_type'),
+  scope: text('scope'),
+  id_token: text('id_token'),
+  session_state: text('session_state'),
+}, (account) => ({
+  compoundKey: primaryKey(account.provider, account.providerAccountId),
+}));
+
+export const authSessions = pgTable('session', {
+  sessionToken: text('sessionToken').notNull().primaryKey(),
+  userId: text('userId').notNull().references(() => authUsers.id, { onDelete: 'cascade' }),
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
+});
+
+export const authVerificationTokens = pgTable('verificationToken', {
+  identifier: text('identifier').notNull(),
+  token: text('token').notNull(),
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
+}, (vt) => ({
+  compoundKey: primaryKey(vt.identifier, vt.token),
+}));
 
 
 // Type exports
