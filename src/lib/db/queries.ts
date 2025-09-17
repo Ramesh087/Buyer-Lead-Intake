@@ -1,5 +1,5 @@
 import { db } from './index';
-import { buyers, buyerHistory, authUsers } from './schema';
+import { buyers, buyerHistory, authUsers, users } from './schema';
 import { eq, and, or, ilike, desc, asc, count } from 'drizzle-orm';
 import type { BuyerFilters } from '@/lib/validations/buyer';
 
@@ -26,9 +26,9 @@ export async function getBuyers(filters: BuyerFilters, userId?: string) {
     createdAt: buyers.createdAt,
     updatedAt: buyers.updatedAt,
     owner: {
-      id: users.id,
-      name: users.name,
-      email: users.email,
+      id: authUsers.id,
+      name: authUsers.name,
+      email: authUsers.email,
     },
   }).from(buyers).leftJoin(authUsers, eq(buyers.ownerId, authUsers.id)) as any;
 
@@ -173,13 +173,13 @@ export async function getBuyerHistory(buyerId: string) {
     changedAt: buyerHistory.changedAt,
     diff: buyerHistory.diff,
     changedBy: {
-      id: authUsers.id,
-      name: authUsers.name,
-      email: authUsers.email,
+      id: users.id,
+      name: users.name,
+      email: users.email,
     },
   })
   .from(buyerHistory)
-  .leftJoin(authUsers, eq(buyerHistory.changedBy, authUsers.id))
+  .leftJoin(users, eq(buyerHistory.changedBy, users.id))
   .where(eq(buyerHistory.buyerId, buyerId))
   .orderBy(desc(buyerHistory.changedAt))
   .limit(5);
@@ -202,7 +202,7 @@ export async function getBuyersStats(userId?: string) {
   }
 
   const stats = await statsQuery;
-  const total = stats.reduce((sum, stat) => sum + stat.count, 0);
+  const total = stats.reduce((sum: number, stat: { count: number }) => sum + stat.count, 0);
 
   return { stats, total };
 }
